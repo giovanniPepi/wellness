@@ -36,11 +36,12 @@ a {
   text-decoration: none;
 }
 
-.header,
-.footer {
+.header
+/*.footer */ {
   display: flex;
   justify-content: space-between;
   padding: 1.5rem;
+  background-color: rgb(187, 220, 248);
 }
 
 .footer {
