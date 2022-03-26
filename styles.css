@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-div {
+/* div {
   border: .1px solid blue;
 }
 
 p {
   border: .1px solid purple;
-}
+} */
 
 body {
   margin: 0;
@@ -16,6 +16,7 @@ body {
 :root {
   --orange: #ec6e00b7;
   --lightblue: #7DD3FC;
+  --myGrey: #F1F5F9;
   font-size: calc(2px + .5vw + 1vh);
 }
 .container {
@@ -36,6 +37,16 @@ body {
 .main {
   grid-column: 1 / 8;
   grid-row: 2 / 15;
+  padding: .5rem;
+  font-size: 1.1rem;
+}
+button {
+  background: none;
+  border: none;
+  box-shadow: 2px 2px 2px 2px var(--myGrey);
+  padding: 1rem;
+  font-size: .9rem;
+  font-weight: bold;
 }
 .buttons {
   display: flex;

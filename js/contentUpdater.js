@@ -1,4 +1,6 @@
 let step = 0;
+let sideBarExists = false;
+let sideHeaderExists = false;
 
 const button1 = document.querySelector("#button1");
 const button2 = document.querySelector("#button2");
@@ -34,26 +36,30 @@ buttonChoiceCreator = (arg1, arg2) => {
     buttons.appendChild(btn4);
 };
 getSideBarGrid = () => {
-    main.style.gridColumn = "2/8";
-    
-    sidebar = document.createElement("div");
-    sidebar.setAttribute("class", "sidebar");
-    sidebar.style.gridColumn = "1/1";
-    sidebar.style.gridRow = "2/10";
-    sidebar.style.background = "var(--lightblue)";
-    sidebar.style.padding = ".1rem";
-    container.appendChild(sidebar);
-
-    if (step < 1) {
+    if (!sideBarExists) {
+        main.style.gridColumn = "2/8";
+        
+        sidebar = document.createElement("div");
+        sidebar.setAttribute("class", "sidebar");
+        sidebar.style.gridColumn = "1/1";
+        sidebar.style.gridRow = "2/10";
+        sidebar.style.background = "var(--lightblue)";
+        sidebar.style.padding = ".1rem";
+        container.appendChild(sidebar);
+        sideBarExists = true;
+    }
+    if (step < 1 ) {
         sideHeader = document.createElement("p")
         sideHeader.setAttribute("class", "sideHeader");
         sideHeader.textContent = "Congratulations! "
         sidebar.prepend(sideHeader);
-    } else if (step >= 1) {
+        sideHeaderExists = true;
+    } else if (step >= 1 && !sideHeaderExists) {
         sideHeader = document.createElement("p")
         sideHeader.setAttribute("class", "sideHeader");
         sideHeader.textContent = "Your checklist "
         sidebar.prepend(sideHeader);
+        sideHeaderExists = true;
     }
 };
 choiceHandler = () => {    
