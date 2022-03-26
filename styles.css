@@ -10,7 +10,7 @@ body {
 :root {
   --complementary1: #7e2f81;
   --complementary2: #c74468;
-  font-size: calc(3px + 1vw + 1vh);
+  font-size: calc(4px + .5vw + 1vh);
 }
 .container {
   display: grid;

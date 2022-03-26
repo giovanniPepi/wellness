@@ -1,5 +1,4 @@
 let feelsBetter = false;
-let shouldAsk = false;
 let step = 0;
 
 const button1 = document.querySelector("#button1");
@@ -40,6 +39,7 @@ choiceHandler = () => {
 }
 feelsBetterHandler = () => {
     if (!feelsBetter) return;
+    sidebarUpdater();
     const text1 = "congratulations! You've solved your problem!";
     const text2 = "come back whenever you need it =)";
     contentUpdater(text1, text2);
@@ -47,6 +47,7 @@ feelsBetterHandler = () => {
 };
 function sidebarUpdater (step){
     sidebar.textContent = step;
+    sidebar.textContent += feelsBetter;
 }
 function buttonListenerUpdater () {
     btn3.addEventListener("click", () => {
@@ -95,6 +96,31 @@ function happinessGenerator (step) {
             " Some people also feel lack of motivation and mood swings after a few days eating less than ideal calories. Please make sure you have been eating properly!", "Have you been eating well lately?")
             buttonChoiceCreator("No - I will eat something", "Yes, I'm well fed");
             buttonListenerUpdater();            
+            break;
+        case 2:
+            sidebarUpdater(step);
+            contentUpdater("Everyone needs to sleep well and most people need from 6 to 9 hours of sleep a day to feel rested - how much hours for you, you probably can estimate. " + 
+            "It may not be possible to sleep as many hours as you wish everyday, but overrall on your week, you need to be rested on a weekly or even monthly basis " + 
+            "to avoid being stressed and burned out." + "If you are in a stressfull and demanding moment of your life, "
+             + "such as raising a newborn or workingovertime, it can be challenging or not possible at all to sleep more hours, " + 
+             "however if you are not feeling well - and that's why you're here - you may try to squeeze a few minutes of sleep on your routine. " + 
+             "These minutes can add up to some hours over weeks and contribute to your well being.", "Have you been sleeping well?");
+            buttonChoiceCreator("No - I will take a nap or try to sleep more", "Yes, I've been sleeping well");
+            buttonListenerUpdater();            
+            break;
+        case 3:
+            sidebarUpdater(step);
+            contentUpdater("");
+            buttonChoiceCreator("", "");
+            buttonListenerUpdater();            
+            break;
+
+/*         case x:
+            sidebarUpdater(step);
+            contentUpdater("");
+            buttonChoiceCreator("", "");
+            buttonListenerUpdater();            
+            break; */
         }
     }
 choiceHandler();
