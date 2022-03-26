@@ -33,3 +33,9 @@ body {
   grid-column: 2 / 8;
   grid-row: 2 / 8;
 }
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
