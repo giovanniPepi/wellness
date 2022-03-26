@@ -50,15 +50,33 @@ function sidebarUpdater (step){
 }
 function buttonListenerUpdater () {
     btn3.addEventListener("click", () => {
-        
+        if (feelsBetter) {
+            feelsBetterHandler();     
+        } else intermediaryStep ();
     });
     btn4.addEventListener("click", () => {
         feelsBetter = true;
         feelsBetterHandler();        
     })
-
 }
-
+function intermediaryStep () {
+    sidebarUpdater(step);
+    contentUpdater("" + "Are you feeling better now?")
+    buttonChoiceCreator("No :(", "Yes!");
+    btn3.addEventListener("click", () => {
+        if (feelsBetter) {
+            feelsBetterHandler();     
+        } else {
+            step++;
+            sidebarUpdater(step);
+            happinessGenerator(step);
+        };
+    });
+    btn4.addEventListener("click", () => {
+        feelsBetter = true;
+        feelsBetterHandler();        
+    })    
+}
 /* PLEASE INCLUDE SOURCES! */
 function happinessGenerator (step) {
     if (feelsBetter) return;
@@ -69,12 +87,16 @@ function happinessGenerator (step) {
             "can be tiring", "Did you drink water in the past few hours?")
             buttonChoiceCreator("No - I will drink now", "Yes, I'm hydrated");
             buttonListenerUpdater();
-
             break;
         case 1:
+            sidebarUpdater(step);
+            contentUpdater("A well balanced diet can keep you nourished for hours. " + 
+            "Some people may feel tired, fatigue and headaches after a few hours from the last meal." + 
+            " Some people also feel lack of motivation and mood swings after a few days eating less than ideal calories. Please make sure you have been eating properly!", "Have you been eating well lately?")
+            buttonChoiceCreator("No - I will eat something", "Yes, I'm well fed");
+            buttonListenerUpdater();            
         }
     }
-
 choiceHandler();
 
 
