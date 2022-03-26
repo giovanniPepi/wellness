@@ -56,8 +56,9 @@ function buttonListenerUpdater () {
         } else intermediaryStep ();
     });
     btn4.addEventListener("click", () => {
-        feelsBetter = true;
-        feelsBetterHandler();        
+        step++
+        sidebarUpdater(step)
+        happinessGenerator(step);        
     })
 }
 function intermediaryStep () {
@@ -110,8 +111,22 @@ function happinessGenerator (step) {
             break;
         case 3:
             sidebarUpdater(step);
+            contentUpdater("Resistance trainning, at least twice a week, and aerobic trainning at least 120 minutes a week, is essential for well being " + 
+            "in a modern sedentary lifestyle.", "Have you been doing resistance and aerobic exercises in the past days?");
+            buttonChoiceCreator("No - I will start right away", "Yes");
+            buttonListenerUpdater();            
+            break;
+        case x:
+            sidebarUpdater(step);
             contentUpdater("");
             buttonChoiceCreator("", "");
+            buttonListenerUpdater();            
+            break; 
+        case 10:
+            sidebarUpdater(step);
+            contentUpdater("Even though rarely, some medications could have side effects that may affect your energy levels and mood. " + 
+            "If you take any medication, please contact your doctor to check out if they could be affecting you.", "Do you take any kind of medications?");
+            buttonChoiceCreator("Yes - I will contact my doctor", "No");
             buttonListenerUpdater();            
             break;
 
