@@ -18,7 +18,8 @@ body {
   grid-template-rows: 1fr 10fr;
   width: 100vw;
   height: 100vh;
-
+  background: rgb(65,201,33);
+  background: linear-gradient(184deg, rgba(65,201,33,0.2943976907169118) 0%, rgba(221,197,56,0.3840335450586485) 100%);
 }
 .header {
   grid-column: 1 / 3;
