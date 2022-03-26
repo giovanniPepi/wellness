@@ -1,5 +1,5 @@
-const startTestBtn = document.querySelector("#startTestBtn")
-const endTestBtn = document.querySelector("#endTestBtn")
+const startTestBtn = document.querySelector("#button1")
+const endTestBtn = document.querySelector("#button2")
 
 startTestBtn.addEventListener("click", () => {
     location.href="./pages/page.html"
