@@ -40,7 +40,8 @@ choiceHandler = () => {
 feelsBetterHandler = () => {
     if (!feelsBetter) return;
     sidebarUpdater();
-    const text1 = "congratulations! You've solved your problem!";
+    const text1 = "congratulations! You've solved your problem! Remember, well being is a process. If you're not feeling well most of the times, you " + 
+    "may need to put more thought into what you can do on your routine to feel better often.";
     const text2 = "come back whenever you need it =)";
     contentUpdater(text1, text2);
     buttons.innerHTML="";
@@ -116,20 +117,73 @@ function happinessGenerator (step) {
             buttonChoiceCreator("No - I will start right away", "Yes");
             buttonListenerUpdater();            
             break;
-        case x:
+        case 4:
             sidebarUpdater(step);
-            contentUpdater("");
-            buttonChoiceCreator("", "");
+            contentUpdater("Caffeine is a double edged sword - while it may help you with energy and mood throughout your morning and work day, " + 
+            "it can cause headaches and induce stress at certain levels. For some people, caffeine may look like it doesn't affect them at all, " + 
+            "but the absence of caffeine can induce withdrawal symptoms like headaches and tiredness. If you need to take much more " + 
+            "than the equivalent of a few cups of espresso a day, it may be affecting your overrall mood and/or sleep quality. Please note that " + 
+            "Coke, Green and Black Tea, Chocolate and other beverages also have a non negligible amount of caffeine in them and can add up to your intake.", 
+            "Have you been intaking a lot of caffeine in the past days?");
+            buttonChoiceCreator("Yes - I will try to reduce my intake", "No, I don't drink too much/at all caffeine.");
             buttonListenerUpdater();            
             break; 
-        case 10:
+            case 5:
+                sidebarUpdater(step);
+                contentUpdater("Alcohol consumption can lead to anxiety and stress as the brain tries to counter act the " + 
+                "depressive effects it has. Mentally, alcohol may lower sleep quality, lower inhibitions and lead to awkward social situations, short term memory loss and unexpected" + 
+                "2AM calls. While most people can moderate and drink socially, some people may not notice how much alcohol consumption - specially " + 
+                "daily - may be affecting their quality of life.", "Have you been drinking more than the equivalent of a beer daily for the past days?");
+                buttonChoiceCreator("Yes - I will try to reduce my intake", "No, I drink sparingly/not at all");
+                buttonListenerUpdater();            
+                break;
+            case 6:
+                sidebarUpdater(step);
+                contentUpdater("Other drugs can also lead to anxiety, stress and mental unwellness, specially when deprived of their use. " + 
+                "If this applies to you, and considering you're here to try to feel better, you may consider asking for professional help to " +
+                "reduce intake and get better.", "Do you use any other drug or substance?");
+                buttonChoiceCreator("Yes - I will call a doctor to help me", "No");
+                buttonListenerUpdater();            
+            break;
+            case 7:
+                sidebarUpdater(step);
+                contentUpdater("Humans are social creatures! Some people may need a lot of social contact and interaction daily, while others feel better " + 
+                "when they're alone in their house relaxing. However, everyone eventually need social contact, specially form their friends and loved " + 
+                "ones. Having at least someone you can talk to and share experiences together helps you feel mentally better in the long run. " + 
+                "If you ever felt lonely at home, but also felt like you wanted to go home when you're at social gatherings, you understand " + 
+                "how you need at least a little social contact. If you don't have anyone, you could try picking out hobbies that are of your interest " + 
+                "and can also be social - such as team sports, cycling, running, gym (these will also solve your need for exercise) " + 
+                "or working and helping a charity/cause you have interested. You're not alone! It can be overwhelmingly at the beggnining, but " + 
+                "A psycologist may help you and complement on your quest to social well being." + "Do you have friends or people you can talk to and share a bond?");
+                buttonChoiceCreator("No - I will work on getting more social contact", "Yes, I have someone");
+                buttonListenerUpdater();            
+            break;
+            case 8:
+                sidebarUpdater(step);
+                contentUpdater("Working is a huge part of the modern life. We often spend much more time working than on leisure time, or time " +
+                "with family and friends, may it be a conscious choice - working more to get a promotion - or an mandatory one by the employer. " + 
+                "Work-life balance has only recently been the focus of research, and the COVID pandemic's increase in remote working has led to a lot fo people " + 
+                "realizing that they could have a better work-life balance." + "If you're currently under stress from work, if possible, you may try to ease a little " + 
+                "bit. There's diminishing returns in work too many hours, and if possible you may reduce hours for some time to get better - which in the end can end " +
+                "up increasing your productivity. If you're stuck because of employer schedules, there may not be an instant choice that will " + 
+                "reduce your work time right now, but realizing that this is affecting you can put you in a path to make choices that wil eventually lead " + 
+                "to a better work life, such as looking for a better employer, better pay, or chaning careers entirely - it's up to you!", 
+                "Has your work-life been unbalanced lately? ");
+                buttonChoiceCreator("Yes - I will work on what I can change to a better work-life balance", "No, I have a good work-life balance");
+                buttonListenerUpdater();            
+            break; 
+            
+            
+
+
+        /* case 10:
             sidebarUpdater(step);
             contentUpdater("Even though rarely, some medications could have side effects that may affect your energy levels and mood. " + 
             "If you take any medication, please contact your doctor to check out if they could be affecting you.", "Do you take any kind of medications?");
             buttonChoiceCreator("Yes - I will contact my doctor", "No");
             buttonListenerUpdater();            
             break;
-
+ */
 /*         case x:
             sidebarUpdater(step);
             contentUpdater("");
