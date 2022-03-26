@@ -3,7 +3,8 @@ let step = 0;
 const button1 = document.querySelector("#button1");
 const button2 = document.querySelector("#button2");
 const buttons = document.querySelector(".buttons"); 
-const sidebar = document.querySelector(".sidebar");
+const container = document.querySelector(".container");
+main = document.querySelector(".main");
 
 sidebarUpdater = (test) => {
     result = document.createElement("p");
@@ -11,7 +12,6 @@ sidebarUpdater = (test) => {
     result.textContent = test;
     sidebar.appendChild(result);
 }
-
 contentUpdater = (arg1, arg2) => {
     const content = document.querySelector(".content");
     const introQuest = document.querySelector(".introQuestion");
@@ -33,6 +33,29 @@ buttonChoiceCreator = (arg1, arg2) => {
     buttons.appendChild(btn3);
     buttons.appendChild(btn4);
 };
+getSideBarGrid = () => {
+    main.style.gridColumn = "2/8";
+    
+    sidebar = document.createElement("div");
+    sidebar.setAttribute("class", "sidebar");
+    sidebar.style.gridColumn = "1/1";
+    sidebar.style.gridRow = "2/10";
+    sidebar.style.background = "var(--lightblue)";
+    sidebar.style.padding = ".1rem";
+    container.appendChild(sidebar);
+
+    if (step < 1) {
+        sideHeader = document.createElement("p")
+        sideHeader.setAttribute("class", "sideHeader");
+        sideHeader.textContent = "Congratulations! "
+        sidebar.prepend(sideHeader);
+    } else if (step >= 1) {
+        sideHeader = document.createElement("p")
+        sideHeader.setAttribute("class", "sideHeader");
+        sideHeader.textContent = "Your checklist "
+        sidebar.prepend(sideHeader);
+    }
+};
 choiceHandler = () => {    
     button1.addEventListener("click", () => {
         feelsBetter = false;
@@ -44,6 +67,7 @@ choiceHandler = () => {
     });
 }
 feelsBetterHandler = () => {
+    getSideBarGrid();  
     if (!feelsBetter) return;
     const text1 = "congratulations! You've solved your problem! Remember, well being is a process. If you're not feeling well most of the times, you " + 
     "may need to put more thought into what you can do on your routine to feel better often.";
@@ -51,10 +75,6 @@ feelsBetterHandler = () => {
     contentUpdater(text1, text2);
     buttons.innerHTML="";
 };
-function sidebarUpdater (step){
-    sidebar.textContent = step;
-    sidebar.textContent += feelsBetter;
-}
 function buttonListenerUpdater () {
     btn3.addEventListener("click", () => {
         if (feelsBetter) {
@@ -72,9 +92,10 @@ function intermediaryStep () {
     buttonChoiceCreator("No :(", "Yes!");
     btn3.addEventListener("click", () => {
         if (feelsBetter) {
-            feelsBetterHandler();     
+            feelsBetterHandler();  
         } else {
             step++;
+            getSideBarGrid();
             happinessGenerator(step);
         };
     });
