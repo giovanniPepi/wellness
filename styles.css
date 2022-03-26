@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 div {
-  border: 1px solid blue;
+  border: .1px solid blue;
 }
 body {
   margin: 0;
@@ -23,7 +23,7 @@ body {
   grid-row: 1 / 1;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 .sidebar {
   grid-column: 1 / 1;
@@ -38,4 +38,13 @@ body {
   justify-content: center;
   gap: 2rem;
 }
-
+.rightButtons {
+  display: flex;
+  gap: .5rem;
+}
+.leftButtons {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
