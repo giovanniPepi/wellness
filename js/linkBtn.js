@@ -1,9 +1,11 @@
-const shitBtn = document.querySelector("#shitBtn");
-const goodBtn = document.querySelector("#goodBtn");
+const startTestBtn = document.querySelector("#startTestBtn")
+const endTestBtn = document.querySelector("#endTestBtn")
 
-shitBtn.addEventListener ("click", () => {
-    location.href="./pages/bad.html";
+startTestBtn.addEventListener("click", () => {
+    location.href="./pages/page.html"
 });
-goodBtn.addEventListener("click", () => { 
-    location.href="./pages/good.html";
-})
+endTestBtn.addEventListener("click", () => {
+    location.href="./pages/page.html"
+});
+
+    

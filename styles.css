@@ -10,12 +10,6 @@ body {
   margin: 0;
 }
 :root {
-  --green1: #ECFCCB;
-  --green2: #BEF264;
-  --green3: #65A30D;
-  --yellow1: #FEF9C3;
-  --yellow2: #FDE047;
-  --yellow3: #CA8A04;
   --complementary1: #7e2f81;
   --complementary2: #c74468;
   font-size: calc(3px + 1vw + 1vh);
