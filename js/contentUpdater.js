@@ -36,23 +36,17 @@ buttonChoiceCreator = (arg1, arg2) => {
     buttons.appendChild(btn4);
 };
 getSideBarGrid = () => {
-    if (!sideBarExists) {
-        main.style.gridColumn = "2/8";
-        
+    if (!sideBarExists) {        
         sidebar = document.createElement("div");
         sidebar.setAttribute("class", "sidebar");
         sidebar.style.gridColumn = "1/3";
         sidebar.style.gridRow = "2/2";
         sidebar.style.background = "var(--lightblue)";
-        sidebar.style.padding = ".1rem";
+        sidebar.style.padding = ".5rem";
         sidebar.style.display = "flex";
         sidebar.style.alignItems = "center";
         sidebar.style.gap = ".5rem";        
         container.appendChild(sidebar);
-        /* lets warning be in a  central position when 
-        the sidebar is not created */
-        warning = document.querySelector(".warning");
-        warning.style.gridColumn = "2/3";
         sideBarExists = true;        
     }
     if (step < 1 ) {
@@ -180,10 +174,10 @@ function happinessGenerator (step) {
                 "If this applies to you, and considering you're here to try to feel better, you may consider asking for professional help to " +
                 "reduce intake and get better.", "Do you use any other drug or substance?");
                 buttonChoiceCreator("Yes - I will call a doctor to help me", "No");
-                buttonListenerUpdater();            
+                buttonListenerUpdater("Drugs: ✔");            
             break;
             case 7:
-                sidebarUpdater("Alcohol: ✔");
+                sidebarUpdater("Drugs: ✔");
                 contentUpdater("Humans are social creatures! Some people may need a lot of social contact and interaction daily, while others feel better " + 
                 "when they're alone in their house relaxing. However, everyone eventually need social contact, specially form their friends and loved " + 
                 "ones. Having at least someone you can talk to and share experiences together helps you feel mentally better in the long run. " + 
@@ -200,7 +194,7 @@ function happinessGenerator (step) {
                 contentUpdater("Working is a huge part of the modern life. We often spend much more time working than on leisure time, or time " +
                 "with family and friends, may it be a conscious choice - working more to get a promotion - or an mandatory one by the employer. " + 
                 "Work-life balance has only recently been the focus of research, and the COVID pandemic's increase in remote working has led to a lot fo people " + 
-                "realizing that they could have a better work-life balance." + "If you're currently under stress from work, if possible, you may try to ease a little " + 
+                "realizing that they could have a better work-life balance. " + "If you're currently under stress from work, if possible, you may try to ease a little " + 
                 "bit. There's diminishing returns in work too many hours, and if possible you may reduce hours for some time to get better - which in the end can end " +
                 "up increasing your productivity. If you're stuck because of employer schedules, there may not be an instant choice that will " + 
                 "reduce your work time right now, but realizing that this is affecting you can put you in a path to make choices that wil eventually lead " + 
