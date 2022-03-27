@@ -135,10 +135,10 @@ function happinessGenerator (step) {
             break;
         case 2:
             sidebarUpdater("Food ✔");
-            contentUpdater("Everyone needs to sleep well and most people need from 6 to 9 hours of sleep a day to feel rested - how much hours for you, you probably can estimate. " + 
-            "It may not be possible to sleep as many hours as you wish everyday, but overrall on your week, you need to be rested on a weekly or even monthly basis " + 
-            "to avoid being stressed and burned out. " + "If you are in a stressfull and demanding moment of your life, "
-             + "such as raising a newborn or workin govertime, it can be challenging or not possible at all to sleep more hours, " + 
+            contentUpdater("Everyone needs to sleep well and most people need from 6 to 9 hours of sleep a day to feel rested - how much hours for you, " +
+            "you probably have a range of hours that are resting and fulfilling. " + "It may not be possible to sleep as many hours as you wish everyday, " +
+            "but overrall on your week, you need to be rested on a weekly or even monthly basis " + "to avoid being stressed and burned out. " +
+            "If you are in a stressfull and demanding moment of your life, " + "such as raising a newborn or workin govertime, it can be challenging or not possible at all to sleep more hours, " + 
              "however if you are not feeling well - and that's why you're here - you may try to squeeze a few minutes of sleep on your routine. " + 
              "These minutes can add up to some hours over weeks and contribute to your well being.", "Have you been sleeping well?");
             buttonChoiceCreator("No - I will take a nap or try to sleep more", "Yes - I've been sleeping well!");
