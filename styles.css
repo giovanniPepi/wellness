@@ -16,7 +16,7 @@ body {
   --myTransition: .3s;
   --myScaling1: 1.03;
   --myScaling2: 1.1;
-  font-size: calc(4px + .5vw + 1vh);
+  font-size: calc(6px + .3vw + 1vh);
 }
 .container {
   display: grid;
