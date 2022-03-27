@@ -120,9 +120,9 @@ function happinessGenerator (step) {
     if (feelsBetter) return;
     switch (step) {
         case 0:
-            contentUpdater("Lack of proper hydration can lead to mood swings, headaches and " +
-            "can be tiring", "Did you drink water in the past few hours?")
-            buttonChoiceCreator("No - I will drink now", "Yes, I'm hydrated");
+            contentUpdater("Water is essential to all biologic activties. Lack of proper hydration can lead to mood swings, headaches and " +
+            "being tired. Over the long run, it can also worsen other health conditions.", "Did you drink water in the past few hours?")
+            buttonChoiceCreator("No - I will drink now", "Yes, I'm hydrated!");
             buttonListenerUpdater("Water ✔");
             break;
         case 1:
