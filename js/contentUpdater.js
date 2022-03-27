@@ -49,7 +49,7 @@ getSideBarGrid = () => {
         /* lets warning be in a  central position when 
         the sidebar is not created */
         warning = document.querySelector(".warning");
-        warning.style.gridColumn = "2/8";
+        warning.style.gridColumn = "2/3";
         sideBarExists = true;        
     }
     if (step < 1 ) {
@@ -85,20 +85,20 @@ feelsBetterHandler = () => {
     contentUpdater(text1, text2);
     buttons.innerHTML="";
 };
-function buttonListenerUpdater () {
+function buttonListenerUpdater (arg) {
+    let passArg = arg;
     btn3.addEventListener("click", () => {
         if (feelsBetter) {
             feelsBetterHandler();     
-        } else intermediaryStep ();
+        } else intermediaryStep (passArg);
     });
     btn4.addEventListener("click", () => {
         step++
-
         happinessGenerator(step);        
     })
 }
-function intermediaryStep () {
-    contentUpdater("" + "Are you feeling better now?")
+function intermediaryStep (arg) {
+    contentUpdater(arg, "Are you feeling better now?")
     buttonChoiceCreator("No :(", "Yes!");
     btn3.addEventListener("click", () => {
         if (feelsBetter) {
@@ -122,7 +122,7 @@ function happinessGenerator (step) {
             contentUpdater("Lack of proper hydration can lead to mood swings, headaches and " +
             "can be tiring", "Did you drink water in the past few hours?")
             buttonChoiceCreator("No - I will drink now", "Yes, I'm hydrated");
-            buttonListenerUpdater();
+            buttonListenerUpdater("Water: ✔");
             break;
         case 1:
             sidebarUpdater("Water: ✔");
@@ -130,10 +130,10 @@ function happinessGenerator (step) {
             "Some people may feel tired, fatigue and headaches after a few hours from the last meal." + 
             " Some people also feel lack of motivation and mood swings after a few days eating less than ideal calories. Please make sure you have been eating properly!", "Have you been eating well lately?")
             buttonChoiceCreator("No - I will eat something", "Yes, I'm well fed");
-            buttonListenerUpdater();            
+            buttonListenerUpdater("Food: ✔");            
             break;
         case 2:
-            sidebarUpdater(("Food: ✔"));
+            sidebarUpdater("Food: ✔");
             contentUpdater("Everyone needs to sleep well and most people need from 6 to 9 hours of sleep a day to feel rested - how much hours for you, you probably can estimate. " + 
             "It may not be possible to sleep as many hours as you wish everyday, but overrall on your week, you need to be rested on a weekly or even monthly basis " + 
             "to avoid being stressed and burned out." + "If you are in a stressfull and demanding moment of your life, "
@@ -141,17 +141,17 @@ function happinessGenerator (step) {
              "however if you are not feeling well - and that's why you're here - you may try to squeeze a few minutes of sleep on your routine. " + 
              "These minutes can add up to some hours over weeks and contribute to your well being.", "Have you been sleeping well?");
             buttonChoiceCreator("No - I will take a nap or try to sleep more", "Yes, I've been sleeping well");
-            buttonListenerUpdater();            
+            buttonListenerUpdater("Sleep: ✔");            
             break;
         case 3:
-            sidebarUpdater(("Sleep: ✔"));
+            sidebarUpdater("Sleep: ✔");
             contentUpdater("Resistance trainning, at least twice a week, and aerobic trainning at least 120 minutes a week, is essential for well being " + 
             "in a modern sedentary lifestyle.", "Have you been doing resistance and aerobic exercises in the past days?");
             buttonChoiceCreator("No - I will start right away", "Yes");
-            buttonListenerUpdater();            
+            buttonListenerUpdater("Exercise: ✔");            
             break;
         case 4:
-            sidebarUpdater(("Exercise: ✔"));
+            sidebarUpdater("Exercise: ✔");
             contentUpdater("Caffeine is a double edged sword - while it may help you with energy and mood throughout your morning and work day, " + 
             "it can cause headaches and induce stress at certain levels. For some people, caffeine may look like it doesn't affect them at all, " + 
             "but the absence of caffeine can induce withdrawal symptoms like headaches and tiredness. If you need to take much more " + 
@@ -159,16 +159,16 @@ function happinessGenerator (step) {
             "Coke, Green and Black Tea, Chocolate and other beverages also have a non negligible amount of caffeine in them and can add up to your intake.", 
             "Have you been intaking a lot of caffeine in the past days?");
             buttonChoiceCreator("Yes - I will try to reduce my intake", "No, I don't drink too much/at all caffeine.");
-            buttonListenerUpdater();            
+            buttonListenerUpdater("Caffeine: ✔");            
             break; 
             case 5:
-                sidebarUpdater(("Caffeine: ✔"));
+                sidebarUpdater("Caffeine: ✔");
                 contentUpdater("Alcohol consumption can lead to anxiety and stress as the brain tries to counter act the " + 
                 "depressive effects it has. Mentally, alcohol may lower sleep quality, lower inhibitions and lead to awkward social situations, short term memory loss and unexpected" + 
                 "2AM calls. While most people can moderate and drink socially, some people may not notice how much alcohol consumption - specially " + 
                 "daily - may be affecting their quality of life.", "Have you been drinking more than the equivalent of a beer daily for the past days?");
                 buttonChoiceCreator("Yes - I will try to reduce my intake", "No, I drink sparingly/not at all");
-                buttonListenerUpdater();            
+                buttonListenerUpdater("Alcohol: ✔");            
                 break;
             case 6:
                 sidebarUpdater(("Alcohol: ✔"));
@@ -179,7 +179,7 @@ function happinessGenerator (step) {
                 buttonListenerUpdater();            
             break;
             case 7:
-                sidebarUpdater(("Drugs: ✔"));
+                sidebarUpdater("Alcohol: ✔");
                 contentUpdater("Humans are social creatures! Some people may need a lot of social contact and interaction daily, while others feel better " + 
                 "when they're alone in their house relaxing. However, everyone eventually need social contact, specially form their friends and loved " + 
                 "ones. Having at least someone you can talk to and share experiences together helps you feel mentally better in the long run. " + 
@@ -187,12 +187,12 @@ function happinessGenerator (step) {
                 "how you need at least a little social contact. If you don't have anyone, you could try picking out hobbies that are of your interest " + 
                 "and can also be social - such as team sports, cycling, running, gym (these will also solve your need for exercise) " + 
                 "or working and helping a charity/cause you have interested. You're not alone! It can be overwhelmingly at the beggnining, but " + 
-                "A psycologist may help you and complement on your quest to social well being." + "Do you have friends or people you can talk to and share a bond?");
+                "A psycologist may help you and complement on your quest to social well being.", "Do you have friends or people you can talk to and share a bond?");
                 buttonChoiceCreator("No - I will work on getting more social contact", "Yes, I have someone");
-                buttonListenerUpdater();            
+                buttonListenerUpdater("Social: ✔");            
             break;
             case 8:
-                sidebarUpdater(("Social: ✔"));
+                sidebarUpdater("Social: ✔");
                 contentUpdater("Working is a huge part of the modern life. We often spend much more time working than on leisure time, or time " +
                 "with family and friends, may it be a conscious choice - working more to get a promotion - or an mandatory one by the employer. " + 
                 "Work-life balance has only recently been the focus of research, and the COVID pandemic's increase in remote working has led to a lot fo people " + 
