@@ -135,8 +135,8 @@ function happinessGenerator (step) {
             sidebarUpdater("Food: ✔");
             contentUpdater("Everyone needs to sleep well and most people need from 6 to 9 hours of sleep a day to feel rested - how much hours for you, you probably can estimate. " + 
             "It may not be possible to sleep as many hours as you wish everyday, but overrall on your week, you need to be rested on a weekly or even monthly basis " + 
-            "to avoid being stressed and burned out." + "If you are in a stressfull and demanding moment of your life, "
-             + "such as raising a newborn or workingovertime, it can be challenging or not possible at all to sleep more hours, " + 
+            "to avoid being stressed and burned out. " + "If you are in a stressfull and demanding moment of your life, "
+             + "such as raising a newborn or workin govertime, it can be challenging or not possible at all to sleep more hours, " + 
              "however if you are not feeling well - and that's why you're here - you may try to squeeze a few minutes of sleep on your routine. " + 
              "These minutes can add up to some hours over weeks and contribute to your well being.", "Have you been sleeping well?");
             buttonChoiceCreator("No - I will take a nap or try to sleep more", "Yes, I've been sleeping well");
@@ -145,7 +145,9 @@ function happinessGenerator (step) {
         case 3:
             sidebarUpdater("Sleep: ✔");
             contentUpdater("Resistance trainning, at least twice a week, and aerobic trainning at least 120 minutes a week, is essential for well being " + 
-            "in a modern sedentary lifestyle.", "Have you been doing resistance and aerobic exercises in the past days?");
+            "in a modern sedentary lifestyle. The older you get, the more you need to have a solid exercise routine to keep up your " + 
+            "quality of life. Good news is, even if you haven't exercised at all before, starting NOW can have positive effects on your " + 
+            "life", "Have you been doing resistance and aerobic exercises in the past days?");
             buttonChoiceCreator("No - I will start right away", "Yes");
             buttonListenerUpdater("Exercise: ✔");            
             break;
@@ -163,7 +165,7 @@ function happinessGenerator (step) {
             case 5:
                 sidebarUpdater("Caffeine: ✔");
                 contentUpdater("Alcohol consumption can lead to anxiety and stress as the brain tries to counter act the " + 
-                "depressive effects it has. Mentally, alcohol may lower sleep quality, lower inhibitions and lead to awkward social situations, short term memory loss and unexpected" + 
+                "depressive effects it has. Mentally, alcohol may lower sleep quality, lower inhibitions and lead to awkward social situations, short term memory loss and unexpected " + 
                 "2AM calls. While most people can moderate and drink socially, some people may not notice how much alcohol consumption - specially " + 
                 "daily - may be affecting their quality of life.", "Have you been drinking more than the equivalent of a beer daily for the past days?");
                 buttonChoiceCreator("Yes - I will try to reduce my intake", "No, I drink sparingly/not at all");
