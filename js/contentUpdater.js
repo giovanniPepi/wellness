@@ -46,7 +46,11 @@ getSideBarGrid = () => {
         sidebar.style.background = "var(--lightblue)";
         sidebar.style.padding = ".1rem";
         container.appendChild(sidebar);
-        sideBarExists = true;
+        /* lets warning be in a  central position when 
+        the sidebar is not created */
+        warning = document.querySelector(".warning");
+        warning.style.gridColumn = "2/8";
+        sideBarExists = true;        
     }
     if (step < 1 ) {
         sideHeader = document.createElement("p")
