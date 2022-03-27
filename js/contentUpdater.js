@@ -19,7 +19,6 @@ contentUpdater = (arg1, arg2) => {
     const introQuest = document.querySelector(".introQuestion");
     content.textContent = arg1;
     introQuest.textContent = arg2;
-    content.scrollIntoView();
 }
 buttonUpdater = (arg1, arg2) => {
     button1.textContent = arg1;
@@ -95,8 +94,7 @@ function buttonListenerUpdater (arg) {
     btn4.addEventListener("click", () => {
         step++
         happinessGenerator(step);        
-    })/* 
-    btn3.scrollIntoView(); */
+    })
 }
 function intermediaryStep (arg) {
     contentUpdater(arg, "Are you feeling better now?")

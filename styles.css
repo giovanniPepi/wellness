@@ -25,7 +25,7 @@ a {
 .container {
   display: grid;
   grid-template-columns: 1fr 4fr;
-  grid-template-rows: 1fr 1fr repeat(3, 2fr) 1fr;
+  grid-template-rows: 1fr 2fr 2fr 1fr 1fr 1fr;
   width: 100vw;
   height: 100vh;  
 }
@@ -69,6 +69,7 @@ button {
 .leftButtons {
   display: flex;
   gap: .5rem;
+  width: 10rem;
   padding: .5rem;
   font-size: 0.9rem;
   font-weight: bold;
@@ -111,4 +112,7 @@ button:hover, .content:hover, .introQuestion:hover{
 }
 button:hover, .leftButtons:hover {
   transform: scale(var(--myScaling2));
+}
+img {
+  width: 1.8rem;
 }
