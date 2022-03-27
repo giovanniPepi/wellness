@@ -71,7 +71,7 @@ button {
   gap: .5rem;
   width: 10rem;
   padding: .5rem;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: bold;
   transition: var(--myTransition);
   transition-timing-function: ease-in-out;
@@ -100,7 +100,9 @@ button {
   transition: var(--myTransition);
   transition-timing-function: ease-in-out;
 }
-
+.initialTitle {
+  font-size: 1.2rem;
+}
 
 /* Transformations */
 

@@ -6,6 +6,9 @@ const button1 = document.querySelector("#button1");
 const button2 = document.querySelector("#button2");
 const buttons = document.querySelector(".buttons"); 
 const container = document.querySelector(".container");
+const content = document.querySelector(".content");
+const introQuest = document.querySelector(".introQuestion");
+const initialTitle = document.querySelector(".initialTitle");
 main = document.querySelector(".main");
 
 sidebarUpdater = (test) => {
@@ -15,8 +18,10 @@ sidebarUpdater = (test) => {
     sidebar.appendChild(result);
 }
 contentUpdater = (arg1, arg2) => {
-    const content = document.querySelector(".content");
-    const introQuest = document.querySelector(".introQuestion");
+    /* removes title if exists */
+    if (document.body.contains(initialTitle)) {
+        main.removeChild(initialTitle);
+    }
     content.textContent = arg1;
     introQuest.textContent = arg2;
 }
