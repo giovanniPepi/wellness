@@ -41,10 +41,13 @@ getSideBarGrid = () => {
         
         sidebar = document.createElement("div");
         sidebar.setAttribute("class", "sidebar");
-        sidebar.style.gridColumn = "1/1";
-        sidebar.style.gridRow = "2/10";
+        sidebar.style.gridColumn = "1/3";
+        sidebar.style.gridRow = "2/2";
         sidebar.style.background = "var(--lightblue)";
         sidebar.style.padding = ".1rem";
+        sidebar.style.display = "flex";
+        sidebar.style.alignItems = "center";
+        sidebar.style.gap = ".5rem";        
         container.appendChild(sidebar);
         /* lets warning be in a  central position when 
         the sidebar is not created */
@@ -62,6 +65,7 @@ getSideBarGrid = () => {
         sideHeader = document.createElement("p")
         sideHeader.setAttribute("class", "sideHeader");
         sideHeader.textContent = "Your checklist "
+        sideHeader.style.marginRight = ".5rem";
         sidebar.prepend(sideHeader);
         sideHeaderExists = true;
     }
