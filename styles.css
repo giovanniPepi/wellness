@@ -12,11 +12,15 @@ body {
   --lightgrey: #F1F5F9;
   --myGrey: #F1F5F9;
   --myRadius: 1.5rem;
-  --mySize: calc(.5vw + .5vh + .5rem);
+  --mySize: calc(.5vw + 2vh + 5px);
   --myTransition: .3s;
   --myScaling1: 1.03;
   --myScaling2: 1.1;
-  font-size: calc(6px + .3vw + 1vh);
+  font-size: calc(10px + .3vw + 1vh);
+}
+a {
+  color: inherit;
+  text-decoration: none;
 }
 .container {
   display: grid;
@@ -35,7 +39,6 @@ body {
 }
 .main {
   grid-column: 1/ 3;
-  font-size: 1.1rem;
   display: flex;
   flex-direction: column;
   gap: var(--mySize);
@@ -67,7 +70,7 @@ button {
   display: flex;
   gap: .5rem;
   padding: .5rem;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   font-weight: bold;
   transition: var(--myTransition);
   transition-timing-function: ease-in-out;
@@ -96,6 +99,7 @@ button {
   transition: var(--myTransition);
   transition-timing-function: ease-in-out;
 }
+
 
 /* Transformations */
 
