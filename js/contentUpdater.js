@@ -52,6 +52,7 @@ getSideBarGrid = () => {
         sidebar.style.alignItems = "center";
         sidebar.style.gap = ".5rem";        
         sidebar.style.flexWrap = "wrap";
+        sidebar.style.fontSize = ".8rem";
         container.appendChild(sidebar);
         sideBarExists = true;        
     }

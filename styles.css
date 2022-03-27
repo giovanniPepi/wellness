@@ -78,7 +78,7 @@ button {
   transition-timing-function: ease-in-out;
 }
 .sideHeader {
-  font-size: 1.1rem;
+  font-size: .9rem;
   font-weight: bold;
 }
 .warning {
