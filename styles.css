@@ -19,6 +19,9 @@ body {
   --myGrey: #F1F5F9;
   --myRadius: 1.5rem;
   --mySize: calc(.5vw + .5vh + .5rem);
+  --myTransition: .3s;
+  --myScaling1: 1.03;
+  --myScaling2: 1.1;
   font-size: calc(3px + .5vw + 1vh);
 }
 .container {
@@ -55,6 +58,8 @@ button {
   font-weight: bold;
   background: white;
   border-radius: var(--myRadius);
+  transition: var(--myTransition);
+  transition-timing-function: ease-in-out;
 }
 .buttons {
   display: flex;
@@ -72,6 +77,8 @@ button {
   padding: .5rem;
   font-size: 1.2rem;
   font-weight: bold;
+  transition: var(--myTransition);
+  transition-timing-function: ease-in-out;
 }
 .sideHeader {
   font-size: 1.1rem;
@@ -86,10 +93,26 @@ button {
   background: white;
   padding: 1rem;
   border-radius: var(--myRadius);
+  transition: var(--myTransition);
+  transition-timing-function: ease-in-out;
 }
 .introQuestion {
   background: white;
   padding: 1rem;
   font-weight: bold;
   border-radius: var(--myRadius);
+  transition: var(--myTransition);
+  transition-timing-function: ease-in-out;
+}
+
+/* Transformations */
+
+button:hover, .content:hover, .introQuestion:hover{
+  transition: var(--myTransition);
+  transition-timing-function: ease-in-out;
+  transform: scale(var(--myScaling1));
+  cursor: pointer;
+}
+button:hover, .leftButtons:hover {
+  transform: scale(var(--myScaling2));
 }
