@@ -19,13 +19,10 @@ body {
   --myGrey: #F1F5F9;
   --myRadius: 1.5rem;
   --mySize: calc(.5vw + .5vh + .5rem);
-<<<<<<< HEAD
   --myTransition: .3s;
   --myScaling1: 1.03;
   --myScaling2: 1.1;
-=======
->>>>>>> 0923cc2b1a0ada8bb5309a0aaa548e3f48bd2b3a
-  font-size: calc(3px + .5vw + 1vh);
+  font-size: calc(4px + .5vw + 1vh);
 }
 .container {
   display: grid;
@@ -61,11 +58,8 @@ button {
   font-weight: bold;
   background: white;
   border-radius: var(--myRadius);
-<<<<<<< HEAD
   transition: var(--myTransition);
   transition-timing-function: ease-in-out;
-=======
->>>>>>> 0923cc2b1a0ada8bb5309a0aaa548e3f48bd2b3a
 }
 .buttons {
   display: flex;
@@ -99,18 +93,14 @@ button {
   background: white;
   padding: 1rem;
   border-radius: var(--myRadius);
-<<<<<<< HEAD
   transition: var(--myTransition);
   transition-timing-function: ease-in-out;
-=======
->>>>>>> 0923cc2b1a0ada8bb5309a0aaa548e3f48bd2b3a
 }
 .introQuestion {
   background: white;
   padding: 1rem;
   font-weight: bold;
   border-radius: var(--myRadius);
-<<<<<<< HEAD
   transition: var(--myTransition);
   transition-timing-function: ease-in-out;
 }
@@ -125,6 +115,4 @@ button:hover, .content:hover, .introQuestion:hover{
 }
 button:hover, .leftButtons:hover {
   transform: scale(var(--myScaling2));
-=======
->>>>>>> 0923cc2b1a0ada8bb5309a0aaa548e3f48bd2b3a
 }
