@@ -274,9 +274,6 @@ function happinessGenerator (step) {
                 buttonListenerUpdater();            
                 getProgressBar(step);
             break;             
-            
-
-
         /* case 10:
             sidebarUpdater(("previous: ✔"));
             contentUpdater("Even though rarely, some medications could have side effects that may affect your energy levels and mood. " + 
