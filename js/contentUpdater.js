@@ -150,8 +150,7 @@ getProgressBar = (step) => {
         progress.style.width = `${increase}vw`;
     } else {
         progress.style.width = "100vw";
-    }
-    
+    }    
 }
 /* creates/remove warning */
 warningHandler = () => {
@@ -168,7 +167,6 @@ warningHandler = () => {
     } else {
         const warning = document.querySelector(".warning");
         main.removeChild(warning);
-        showWarning = true;
     }
 }
 /* PLEASE INCLUDE SOURCES! */
