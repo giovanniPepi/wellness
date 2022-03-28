@@ -168,7 +168,6 @@ warningHandler = () => {
     } else {
         const warning = document.querySelector(".warning");
         main.removeChild(warning);
-        showWarning = true;
     }
 }
 /* PLEASE INCLUDE SOURCES! */
