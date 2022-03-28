@@ -153,7 +153,7 @@ getProgressBar = (step) => {
         progress.style.width = "100vw";
     }
 }
-/* creates/remove warning */
+/* creates/remove warning based on boolean*/
 warningHandler = () => {
     if (showWarning) {
         const warning = document.createElement("p");
@@ -166,8 +166,8 @@ warningHandler = () => {
         main.appendChild(warning);
         showWarning = false;
     } else {
-        const warning = document.querySelector(".warning");
-        main.removeChild(warning);
+        const warning = document.querySelector(".warning");    
+        if (!showWarning && main.contains(warning)) main.removeChild(warning);
     }
 }
 /* PLEASE INCLUDE SOURCES! */
