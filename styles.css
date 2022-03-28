@@ -10,6 +10,7 @@ body {
   --orange: #ec6e00b7;
   --lightblue: #7DD3FC;
   --lightgrey: #F1F5F9;
+  --greenP: #84CC16;
   --myGrey: #F1F5F9;
   --myRadius: 1.5rem;
   --mySize: calc(.5vw + 2vh + 5px);
@@ -25,7 +26,7 @@ a {
 .container {
   display: grid;
   grid-template-columns: 1fr 4fr;
-  grid-template-rows: 1fr 1fr 10fr;
+  grid-template-rows: 1fr 1fr 1fr 10fr;
   width: 100vw;
   height: 100vh;  
 }

@@ -9,7 +9,8 @@ const container = document.querySelector(".container");
 const content = document.querySelector(".content");
 const introQuest = document.querySelector(".introQuestion");
 const initialTitle = document.querySelector(".initialTitle");
-main = document.querySelector(".main");
+const main = document.querySelector(".main");
+const header = document.querySelector(".header");
 
 sidebarUpdater = (test) => {
     result = document.createElement("p");
@@ -119,6 +120,24 @@ function intermediaryStep (arg) {
         feelsBetterHandler();        
     })    
 }
+/* handles and update progressbar after every question */ 
+getProgressBar = () => {
+    const progressBar = document.createElement("div");
+    progressBar.setAttribute("class", "progressBar");
+    progressBar.style.height = ".3rem";
+    progressBar.style.gridRow = " 3 / 4";
+    progressBar.style.gridColumn = "1/2";
+
+    const progress = document.createElement('div');
+    progress.setAttribute("class", "progress");
+    progress.style.height = "inherit";
+    progress.style.width = "10vw";
+    progress.style.background = "var(--greenP)";
+
+    progressBar.appendChild(progress);
+    container.insertBefore(progressBar, main);
+}
+
 /* PLEASE INCLUDE SOURCES! */
 function happinessGenerator (step) {
     if (feelsBetter) return;
