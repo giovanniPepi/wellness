@@ -1,6 +1,7 @@
 let step = 0;
 let sideBarExists = false;
 let sideHeaderExists = false;
+let showWarning = true;
 
 const button1 = document.querySelector("#button1");
 const button2 = document.querySelector("#button2");
@@ -91,6 +92,7 @@ feelsBetterHandler = () => {
     contentUpdater(text1, text2);
     buttons.innerHTML="";
 };
+/* Updates button text and action for every question*/
 function buttonListenerUpdater (arg) {
     let passArg = arg;
     btn3.addEventListener("click", () => {
@@ -103,6 +105,7 @@ function buttonListenerUpdater (arg) {
         happinessGenerator(step);        
     })
 }
+/*handles "are you better" question */ 
 function intermediaryStep (arg) {
     contentUpdater(arg, "Are you feeling better now?")
     buttonChoiceCreator("No 😐", "Yes! 😀");
@@ -136,10 +139,33 @@ getProgressBar = () => {
 
     progressBar.appendChild(progress);
     container.insertBefore(progressBar, main);
+    function progressCalc (step) {
+
+    }
+}
+/* creates/remove warning */
+warningHandler = () => {
+    if (showWarning) {
+        const warning = document.createElement("p");
+        warning.setAttribute("class", "warning");
+        warning.style.gridColumn = "1/3";
+        warning.style.gridRow = "6 / 6";
+        warning.style.fontSize = ".6rem";
+        warning.textContent = "Wellness test is not medical advice, nor should replace" +
+        " your doctors orders";
+        main.appendChild(warning);
+        showWarning = false;
+    } else {
+        const warning = document.querySelector(".warning");
+        main.removeChild(warning);
+        showWarning = true;
+    }
 }
 
 /* PLEASE INCLUDE SOURCES! */
 function happinessGenerator (step) {
+    // removes warning
+    warningHandler();
     if (feelsBetter) return;
     switch (step) {
         case 0:
@@ -251,7 +277,7 @@ function happinessGenerator (step) {
         }
 }
 choiceHandler();
-
+warningHandler();
 
 
 

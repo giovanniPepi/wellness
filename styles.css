@@ -17,7 +17,7 @@ body {
   --myTransition: .3s;
   --myScaling1: 1.03;
   --myScaling2: 1.1;
-  font-size: calc(10px + .3vw + 1vh);
+  font-size: calc(9px + .3vw + 1vh);
 }
 a {
   color: inherit;
@@ -26,7 +26,7 @@ a {
 .container {
   display: grid;
   grid-template-columns: 1fr 4fr;
-  grid-template-rows: 1fr 1fr 1fr 10fr;
+  grid-template-rows: 1fr 1fr .5fr 6fr 1fr;
   width: 100vw;
   height: 100vh;  
 }
@@ -86,7 +86,8 @@ button {
 .warning {
   grid-column: 1 / 3;
   grid-row: 6/6;
-  font-size: .7rem;
+  font-size: .6rem;
+  height: 1rem;
 }
 .content {
   background: white;
