@@ -99,7 +99,7 @@ function buttonListenerUpdater (arg) {
     btn3.addEventListener("click", () => {
         if (feelsBetter) {
             feelsBetterHandler();     
-        } else intermediaryStep (passArg);
+        } else intermediaryStep (arg);
     });
     btn4.addEventListener("click", () => {
         step++
