@@ -2,6 +2,7 @@ let step = 0;
 let sideBarExists = false;
 let sideHeaderExists = false;
 let showWarning = true;
+let progressBarExists = false;
 
 const button1 = document.querySelector("#button1");
 const button2 = document.querySelector("#button2");
@@ -125,26 +126,32 @@ function intermediaryStep (arg) {
 }
 /* handles and update progressbar after every question */ 
 getProgressBar = (step) => {
-    const progressBar = document.createElement("div");
-    progressBar.setAttribute("class", "progressBar");
-    progressBar.style.height = ".3rem";
-    progressBar.style.gridRow = " 3 / 4";
-    progressBar.style.gridColumn = "1/2";
+    if (!progressBarExists) {
+        const progressBar = document.createElement("div");
+        progressBar.setAttribute("class", "progressBar");
+        progressBar.style.height = ".3rem";
+        progressBar.style.gridRow = " 3 / 4";
+        progressBar.style.gridColumn = "1/2";
+        progressBar.style.transition = "width 1s";
 
-    const progress = document.createElement('div');
-    progress.setAttribute("class", "progress");
-    progress.style.height = "inherit";
+        const progress = document.createElement('div');
+        progress.setAttribute("class", "progress");
+        progress.style.height = "inherit";
+        progress.style.background = "var(--greenP)";
+        
+        progressBar.appendChild(progress);
+        container.insertBefore(progressBar, main);    
+
+        sideBarExists = true;
+    }
+    progress = document.querySelector(".progress");
     if (step <= 10) {
         let increase = step * 10;
         progress.style.width = `${increase}vw`;
     } else {
         progress.style.width = "100vw";
     }
-    progress.style.background = "var(--greenP)";
-
-    progressBar.appendChild(progress);
-    container.insertBefore(progressBar, main);
-
+    
 }
 /* creates/remove warning */
 warningHandler = () => {
