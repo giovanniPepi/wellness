@@ -20,7 +20,7 @@ body {
   font-size: calc(9px + .3vw + 1vh);
 }
 a {
-  height: inehrit;
+  height: inherit;
   color: inherit;
   text-decoration: none;
 }
