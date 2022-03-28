@@ -124,7 +124,7 @@ function intermediaryStep (arg) {
     })    
 }
 /* handles and update progressbar after every question */ 
-getProgressBar = () => {
+getProgressBar = (step) => {
     const progressBar = document.createElement("div");
     progressBar.setAttribute("class", "progressBar");
     progressBar.style.height = ".3rem";
@@ -134,14 +134,17 @@ getProgressBar = () => {
     const progress = document.createElement('div');
     progress.setAttribute("class", "progress");
     progress.style.height = "inherit";
-    progress.style.width = "10vw";
+    if (step <= 10) {
+        let increase = step * 10;
+        progress.style.width = `${increase}vw`;
+    } else {
+        progress.style.width = "100vw";
+    }
     progress.style.background = "var(--greenP)";
 
     progressBar.appendChild(progress);
     container.insertBefore(progressBar, main);
-    function progressCalc (step) {
 
-    }
 }
 /* creates/remove warning */
 warningHandler = () => {
@@ -161,7 +164,6 @@ warningHandler = () => {
         showWarning = true;
     }
 }
-
 /* PLEASE INCLUDE SOURCES! */
 function happinessGenerator (step) {
     // removes warning
@@ -180,7 +182,8 @@ function happinessGenerator (step) {
             "Some people may feel tired, fatigue and headaches after a few hours from the last meal." + 
             " Some people also feel lack of motivation and mood swings after a few days eating less than ideal calories. Please make sure you have been eating properly!", "Have you been eating well lately?")
             buttonChoiceCreator("No - I will eat something!", "Yes - I'm well fed");
-            buttonListenerUpdater("Food ✔");            
+            buttonListenerUpdater("Food ✔");      
+            getProgressBar(step);      
             break;
         case 2:
             sidebarUpdater("Food ✔");
@@ -192,6 +195,7 @@ function happinessGenerator (step) {
              "These minutes can add up to some hours over weeks and contribute to your well being.", "Have you been sleeping well?");
             buttonChoiceCreator("No - I will take a nap or try to sleep more", "Yes - I've been sleeping well!");
             buttonListenerUpdater("Sleep ✔");            
+            getProgressBar(step);
             break;
         case 3:
             sidebarUpdater("Sleep ✔");
@@ -201,6 +205,7 @@ function happinessGenerator (step) {
             "life", "Have you been doing resistance and aerobic exercises in the past days?");
             buttonChoiceCreator("No - I will start exercising!", "Yes - I exercise regularly!");
             buttonListenerUpdater("Exercise: ✔");            
+            getProgressBar(step);
             break;
         case 4:
             sidebarUpdater("Exercise ✔");
@@ -212,6 +217,7 @@ function happinessGenerator (step) {
             "Have you been intaking a lot of caffeine in the past days?");
             buttonChoiceCreator("Yes - I will reduce caffeine intake", "No - I don't drink too much/at all caffeine");
             buttonListenerUpdater("Caffeine ✔");            
+            getProgressBar(step);
             break; 
             case 5:
                 sidebarUpdater("Caffeine ✔");
@@ -221,6 +227,7 @@ function happinessGenerator (step) {
                 "daily - may be affecting their quality of life.", "Have you been drinking more than the equivalent of a beer daily for the past days?");
                 buttonChoiceCreator("Yes - I will reduce my intake!", "No - I drink sparingly/not at all");
                 buttonListenerUpdater("Alcohol ✔");            
+                getProgressBar(step);
                 break;
             case 6:
                 sidebarUpdater(("Alcohol ✔"));
@@ -229,6 +236,7 @@ function happinessGenerator (step) {
                 "reduce intake and assist you. Professional help is essential in this step.", "Do you use any other drugs or stimulating substances?");
                 buttonChoiceCreator("Yes - I will call a doctor and get help", "No - I don't use other substances");
                 buttonListenerUpdater("Drugs ✔");            
+                getProgressBar(step);
             break;
             case 7:
                 sidebarUpdater("Drugs ✔");
@@ -242,6 +250,7 @@ function happinessGenerator (step) {
                 "A psycologist may help you and complement on your quest to social well being.", "Do you have friends or people you can talk to and share a bond?");
                 buttonChoiceCreator("No - I will work on getting more social contact", "Yes - I have someone or group of support");
                 buttonListenerUpdater("Social ✔");            
+                getProgressBar(step);
             break;
             case 8:
                 sidebarUpdater("Social ✔");
@@ -256,6 +265,7 @@ function happinessGenerator (step) {
                 "Has your work-life been unbalanced lately? ");
                 buttonChoiceCreator("Yes - I will work on changing to a better work-life balance", "No - I have a good work-life balance");
                 buttonListenerUpdater();            
+                getProgressBar(step);
             break;             
             
 
