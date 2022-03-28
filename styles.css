@@ -20,13 +20,14 @@ body {
   font-size: calc(9px + .3vw + 1vh);
 }
 a {
+  height: inehrit;
   color: inherit;
   text-decoration: none;
 }
 .container {
   display: grid;
   grid-template-columns: 1fr 4fr;
-  grid-template-rows: 1fr 1fr .5fr 6fr 1fr;
+  grid-template-rows: 1fr 1fr auto 10fr .5fr;
   width: 100vw;
   height: 100vh;  
 }
@@ -40,11 +41,11 @@ a {
 }
 .main {
   grid-column: 1/ 3;
-  grid-row: 3 / 5;
+  margin-top: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--mySize);
   padding: var(--mySize);
+  gap: var(--mySize);
 }
 button {
   background: none;
@@ -66,7 +67,7 @@ button {
 .rightButtons {
   display: flex;
   gap: .5rem;
-  padding: .5rem;
+  padding: .5rem 1.2rem 0 0;
 }
 .leftButtons {
   display: flex;
@@ -83,7 +84,7 @@ button {
   font-size: .9rem;
   font-weight: bold;
 }
-.content {
+.content,.initialTitle {
   background: white;
   padding: 1rem;
   border-radius: var(--myRadius);
@@ -103,7 +104,6 @@ button {
 }
 
 /* Transformations */
-
 button:hover, .content:hover, .introQuestion:hover{
   transition: var(--myTransition);
   transition-timing-function: ease-in-out;

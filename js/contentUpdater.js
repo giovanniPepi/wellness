@@ -48,7 +48,7 @@ getSideBarGrid = () => {
         sidebar = document.createElement("div");
         sidebar.setAttribute("class", "sidebar");
         sidebar.style.gridColumn = "1/3";
-        sidebar.style.gridRow = "2/2";
+        sidebar.style.gridRow = "2/auto";
         sidebar.style.background = "var(--lightblue)";
         sidebar.style.padding = ".5rem";
         sidebar.style.display = "flex";
@@ -138,11 +138,12 @@ getProgressBar = (step) => {
         progress.setAttribute("class", "progress");
         progress.style.height = "inherit";
         progress.style.background = "var(--greenP)";
-        
+        progress.style.width = ".1vw"
+
         progressBar.appendChild(progress);
         container.insertBefore(progressBar, main);    
 
-        sideBarExists = true;
+        progressBarExists = true;
     }
     progress = document.querySelector(".progress");
     if (step <= 10) {
@@ -151,7 +152,6 @@ getProgressBar = (step) => {
     } else {
         progress.style.width = "100vw";
     }
-    
 }
 /* creates/remove warning */
 warningHandler = () => {
@@ -182,6 +182,7 @@ function happinessGenerator (step) {
             "being tired. Over the long run, it can also worsen other health conditions.", "Did you drink water in the past few hours?")
             buttonChoiceCreator("No - I will drink now", "Yes, I'm hydrated!");
             buttonListenerUpdater("Water ✔");
+            getProgressBar(step);
             break;
         case 1:
             sidebarUpdater("Water ✔");
