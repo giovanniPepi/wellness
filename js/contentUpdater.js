@@ -25,16 +25,50 @@ const dQuery = (function () {
     const header = document.querySelector(".header");
     const body = document.querySelector("body");
 
+
+    const getSideBarGrid = () => {
+        if (!sideBarExists) {        
+            sidebar = document.createElement("div");
+            sidebar.setAttribute("class", "sidebar");
+            sidebar.style.gridColumn = "1/3";
+            sidebar.style.gridRow = "2/auto";
+            sidebar.style.background = "var(--lightblue)";
+            sidebar.style.padding = ".5rem";
+            sidebar.style.display = "flex";
+            sidebar.style.alignItems = "center";
+            sidebar.style.gap = ".5rem";        
+            sidebar.style.flexWrap = "wrap";
+            sidebar.style.fontSize = ".8rem";
+            container.appendChild(sidebar);
+            sideBarExists = true;        
+        };
+    };
     const sidebarUpdater = (test) => {
+        getSideBarGrid();
+        if (step < 1 ) {
+            sideHeader = document.createElement("p")
+            sideHeader.setAttribute("class", "sideHeader");
+            sideHeader.textContent = "Congratulations! "
+            sidebar.prepend(sideHeader);
+            sideHeaderExists = true;
+        } else if (step >= 1 && !sideHeaderExists) {
+            sideHeader = document.createElement("p")
+            sideHeader.setAttribute("class", "sideHeader");
+            sideHeader.textContent = "Your checklist "
+            sideHeader.style.marginRight = ".5rem";
+            sidebar.prepend(sideHeader);
+            sideHeaderExists = true;
+        }
         result = document.createElement("p");
         result.setAttribute("class", "resultProgress");
         result.textContent = test;
         sidebar.appendChild(result);
-    };
+    };  
+
     const contentUpdater = (arg1, arg2) => {
         /* removes title if exists */
-        if (body.contains(dQuery.initialTitle)) {
-            main.removeChild(dQuery.initialTitle);
+        if (body.contains(initialTitle)) {
+            main.removeChild(initialTitle);
         }
         content.textContent = arg1;
         introQuest.textContent = arg2;
@@ -54,45 +88,36 @@ const dQuery = (function () {
         buttons.appendChild(btn3);
         buttons.appendChild(btn4);
     };
-    getSideBarGrid = () => {
-    if (!sideBarExists) {        
-        sidebar = document.createElement("div");
-        sidebar.setAttribute("class", "sidebar");
-        sidebar.style.gridColumn = "1/3";
-        sidebar.style.gridRow = "2/auto";
-        sidebar.style.background = "var(--lightblue)";
-        sidebar.style.padding = ".5rem";
-        sidebar.style.display = "flex";
-        sidebar.style.alignItems = "center";
-        sidebar.style.gap = ".5rem";        
-        sidebar.style.flexWrap = "wrap";
-        sidebar.style.fontSize = ".8rem";
-        container.appendChild(sidebar);
-        sideBarExists = true;        
-        if (step < 1 ) {
-            sideHeader = document.createElement("p")
-            sideHeader.setAttribute("class", "sideHeader");
-            sideHeader.textContent = "Congratulations! "
-            sidebar.prepend(sideHeader);
-            sideHeaderExists = true;
-        } else if (step >= 1 && !sideHeaderExists) {
-            sideHeader = document.createElement("p")
-            sideHeader.setAttribute("class", "sideHeader");
-            sideHeader.textContent = "Your checklist "
-            sideHeader.style.marginRight = ".5rem";
-            sidebar.prepend(sideHeader);
-            sideHeaderExists = true;
-        }
-    };
-    };
+
 
     return {
         button1, button2, buttons, container, content, 
         introQuest, initialTitle, main, header, body, sidebarUpdater, 
-        contentUpdater, buttonUpdater, buttonChoiceCreator, getSideBarGrid,
-
+        contentUpdater, buttonUpdater, buttonChoiceCreator, getSideBarGrid, 
+        sidebarUpdater,
     }
 })(); 
+
+// updates eventListeners
+const handleListener = (function () {
+    const feelsBetterHandler = () => {
+        dQuery.getSideBarGrid();  
+        dQuery.sidebarUpdater();
+        if (!feelsBetter) return;
+        const text1 = "congratulations! You've solved your problem! Remember, well being is a process. If you're not feeling well most of the times, you " + 
+        "may need to put more thought into what you can do on your routine to feel better often.";
+        const text2 = "come back whenever you need it =)";
+        dQuery.contentUpdater(text1, text2);
+        dQuery.buttons.innerHTML="";
+    };
+
+    return {
+        feelsBetterHandler,
+    }
+
+    
+})();
+
 
 choiceHandler = () => {    
     button1.addEventListener("click", () => {
@@ -101,23 +126,15 @@ choiceHandler = () => {
     })  
     button2.addEventListener("click", () => {
         feelsBetter = true;
-        feelsBetterHandler();
+        handleListener.feelsBetterHandler();
     });
 }
-feelsBetterHandler = () => {
-    dQuery.getSideBarGrid();  
-    if (!feelsBetter) return;
-    const text1 = "congratulations! You've solved your problem! Remember, well being is a process. If you're not feeling well most of the times, you " + 
-    "may need to put more thought into what you can do on your routine to feel better often.";
-    const text2 = "come back whenever you need it =)";
-    dQuery.contentUpdater(text1, text2);
-    dQuery.buttons.innerHTML="";
-};
+
 /* Updates button text and action for every question*/
 function buttonListenerUpdater (arg) {
     btn3.addEventListener("click", () => {
         if (feelsBetter) {
-            feelsBetterHandler();     
+            handleListener.feelsBetterHandler();     
         } else intermediaryStep (arg);
     });
     btn4.addEventListener("click", () => {
@@ -131,16 +148,17 @@ function intermediaryStep (arg) {
     dQuery.buttonChoiceCreator("No 😐", "Yes! 😀");
     btn3.addEventListener("click", () => {
         if (feelsBetter) {
-            feelsBetterHandler();  
+            handleListener.feelsBetterHandler();  
         } else {
             step++;
             dQuery.getSideBarGrid();
+            dQuery.sidebarUpdater();
             happinessGenerator(step);
         };
     });
     btn4.addEventListener("click", () => {
         feelsBetter = true;
-        feelsBetterHandler();        
+        handleListener.feelsBetterHandler();        
     })    
 }
 /* handles and update progressbar after every question */ 
