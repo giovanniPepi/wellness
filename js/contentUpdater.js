@@ -6,7 +6,6 @@ let step = 0;
     steps.push(null);
     return steps.length;    
 } */
-
 let sideBarExists = false;
 let sideHeaderExists = false;
 let showWarning = true;
@@ -31,8 +30,7 @@ const dQuery = (function () {
         result.setAttribute("class", "resultProgress");
         result.textContent = test;
         sidebar.appendChild(result);
-    }
-
+    };
     const contentUpdater = (arg1, arg2) => {
         /* removes title if exists */
         if (body.contains(dQuery.initialTitle)) {
@@ -40,32 +38,23 @@ const dQuery = (function () {
         }
         content.textContent = arg1;
         introQuest.textContent = arg2;
-    }
-
-    return {
-        button1, button2, buttons, container, content, 
-        introQuest, initialTitle, main, header, body, sidebarUpdater, contentUpdater,
-    }
-})(); 
-
-buttonUpdater = (arg1, arg2) => {
-    dQuery.button1;
-    dQuery.button2;
-    button1.textContent = arg1;
-    button2.textContent = arg2;
-}
-buttonChoiceCreator = (arg1, arg2) => {
-    dQuery.buttons.innerHTML="";
-    btn3 = document.createElement("button");
-    btn3.setAttribute("class", "button");
-    btn4 = document.createElement("button");
-    btn4.setAttribute("class", "button");
-    btn3.textContent = arg1;
-    btn4.textContent = arg2;
-    dQuery.buttons.appendChild(btn3);
-    dQuery.buttons.appendChild(btn4);
-};
-getSideBarGrid = () => {
+    };
+    const buttonUpdater = (arg1, arg2) => {
+        button1.textContent = arg1;
+        button2.textContent = arg2;
+    };
+    const buttonChoiceCreator = (arg1, arg2) => {
+        buttons.innerHTML="";
+        btn3 = document.createElement("button");
+        btn3.setAttribute("class", "button");
+        btn4 = document.createElement("button");
+        btn4.setAttribute("class", "button");
+        btn3.textContent = arg1;
+        btn4.textContent = arg2;
+        buttons.appendChild(btn3);
+        buttons.appendChild(btn4);
+    };
+    getSideBarGrid = () => {
     if (!sideBarExists) {        
         sidebar = document.createElement("div");
         sidebar.setAttribute("class", "sidebar");
@@ -78,24 +67,33 @@ getSideBarGrid = () => {
         sidebar.style.gap = ".5rem";        
         sidebar.style.flexWrap = "wrap";
         sidebar.style.fontSize = ".8rem";
-        dQuery.container.appendChild(sidebar);
+        container.appendChild(sidebar);
         sideBarExists = true;        
+        if (step < 1 ) {
+            sideHeader = document.createElement("p")
+            sideHeader.setAttribute("class", "sideHeader");
+            sideHeader.textContent = "Congratulations! "
+            sidebar.prepend(sideHeader);
+            sideHeaderExists = true;
+        } else if (step >= 1 && !sideHeaderExists) {
+            sideHeader = document.createElement("p")
+            sideHeader.setAttribute("class", "sideHeader");
+            sideHeader.textContent = "Your checklist "
+            sideHeader.style.marginRight = ".5rem";
+            sidebar.prepend(sideHeader);
+            sideHeaderExists = true;
+        }
+    };
+    };
+
+    return {
+        button1, button2, buttons, container, content, 
+        introQuest, initialTitle, main, header, body, sidebarUpdater, 
+        contentUpdater, buttonUpdater, buttonChoiceCreator, getSideBarGrid,
+
     }
-    if (step < 1 ) {
-        sideHeader = document.createElement("p")
-        sideHeader.setAttribute("class", "sideHeader");
-        sideHeader.textContent = "Congratulations! "
-        sidebar.prepend(sideHeader);
-        sideHeaderExists = true;
-    } else if (step >= 1 && !sideHeaderExists) {
-        sideHeader = document.createElement("p")
-        sideHeader.setAttribute("class", "sideHeader");
-        sideHeader.textContent = "Your checklist "
-        sideHeader.style.marginRight = ".5rem";
-        sidebar.prepend(sideHeader);
-        sideHeaderExists = true;
-    }
-};
+})(); 
+
 choiceHandler = () => {    
     button1.addEventListener("click", () => {
         feelsBetter = false;
@@ -107,7 +105,7 @@ choiceHandler = () => {
     });
 }
 feelsBetterHandler = () => {
-    getSideBarGrid();  
+    dQuery.getSideBarGrid();  
     if (!feelsBetter) return;
     const text1 = "congratulations! You've solved your problem! Remember, well being is a process. If you're not feeling well most of the times, you " + 
     "may need to put more thought into what you can do on your routine to feel better often.";
@@ -117,7 +115,6 @@ feelsBetterHandler = () => {
 };
 /* Updates button text and action for every question*/
 function buttonListenerUpdater (arg) {
-    let passArg = arg;
     btn3.addEventListener("click", () => {
         if (feelsBetter) {
             feelsBetterHandler();     
@@ -131,13 +128,13 @@ function buttonListenerUpdater (arg) {
 /*handles "are you better" question */ 
 function intermediaryStep (arg) {
     dQuery.contentUpdater(arg, "Are you feeling better now?")
-    buttonChoiceCreator("No 😐", "Yes! 😀");
+    dQuery.buttonChoiceCreator("No 😐", "Yes! 😀");
     btn3.addEventListener("click", () => {
         if (feelsBetter) {
             feelsBetterHandler();  
         } else {
             step++;
-            getSideBarGrid();
+            dQuery.getSideBarGrid();
             happinessGenerator(step);
         };
     });
@@ -201,7 +198,7 @@ function happinessGenerator (step) {
         case 0:
             dQuery.contentUpdater("Water is essential to all biologic activties. Lack of proper hydration can lead to mood swings, headaches and " +
             "being tired. Over the long run, it can also worsen other health conditions.", "Did you drink water in the past few hours?")
-            buttonChoiceCreator("No - I will drink now", "Yes, I'm hydrated!");
+            dQuery.buttonChoiceCreator("No - I will drink now", "Yes, I'm hydrated!");
             buttonListenerUpdater("Water ✔");
             getProgressBar(step);
             break;
@@ -210,7 +207,7 @@ function happinessGenerator (step) {
             dQuery.contentUpdater("A well balanced diet can keep you nourished for hours. " + 
             "Some people may feel tired, fatigue and headaches after a few hours from the last meal." + 
             " Some people also feel lack of motivation and mood swings after a few days eating less than ideal calories. Please make sure you have been eating properly!", "Have you been eating well lately?")
-            buttonChoiceCreator("No - I will eat something!", "Yes - I'm well fed");
+            dQuery.buttonChoiceCreator("No - I will eat something!", "Yes - I'm well fed");
             buttonListenerUpdater("Food ✔");      
             getProgressBar(step);      
             break;
@@ -222,7 +219,7 @@ function happinessGenerator (step) {
             "If you are in a stressfull and demanding moment of your life, " + "such as raising a newborn or workin govertime, it can be challenging or not possible at all to sleep more hours, " + 
              "however if you are not feeling well - and that's why you're here - you may try to squeeze a few minutes of sleep on your routine. " + 
              "These minutes can add up to some hours over weeks and contribute to your well being.", "Have you been sleeping well?");
-            buttonChoiceCreator("No - I will take a nap or try to sleep more", "Yes - I've been sleeping well!");
+            dQuery.buttonChoiceCreator("No - I will take a nap or try to sleep more", "Yes - I've been sleeping well!");
             buttonListenerUpdater("Sleep ✔");            
             getProgressBar(step);
             break;
@@ -232,7 +229,7 @@ function happinessGenerator (step) {
             "in a modern sedentary lifestyle. The older you get, the more you need to have a solid exercise routine to keep up your " + 
             "quality of life. Good news is, even if you haven't exercised at all before, starting NOW can have positive effects on your " + 
             "life", "Have you been doing resistance and aerobic exercises in the past days?");
-            buttonChoiceCreator("No - I will start exercising!", "Yes - I exercise regularly!");
+            dQuery.buttonChoiceCreator("No - I will start exercising!", "Yes - I exercise regularly!");
             buttonListenerUpdater("Exercise: ✔");            
             getProgressBar(step);
             break;
@@ -244,7 +241,7 @@ function happinessGenerator (step) {
             "than the equivalent of a few cups of espresso a day, it may be affecting your overrall mood and/or sleep quality. Please note that " + 
             "Coke, Green and Black Tea, Chocolate and other beverages also have a non negligible amount of caffeine in them and can add up to your intake.", 
             "Have you been intaking a lot of caffeine in the past days?");
-            buttonChoiceCreator("Yes - I will reduce caffeine intake", "No - I don't drink too much/at all caffeine");
+            dQuery.buttonChoiceCreator("Yes - I will reduce caffeine intake", "No - I don't drink too much/at all caffeine");
             buttonListenerUpdater("Caffeine ✔");            
             getProgressBar(step);
             break; 
@@ -254,7 +251,7 @@ function happinessGenerator (step) {
                 "depressive effects it has. Mentally, alcohol may lower sleep quality, lower inhibitions and lead to awkward social situations, short term memory loss and unexpected " + 
                 "2AM calls. While most people can moderate and drink socially, some people may not notice how much alcohol consumption - specially " + 
                 "daily - may be affecting their quality of life.", "Have you been drinking more than the equivalent of a beer daily for the past days?");
-                buttonChoiceCreator("Yes - I will reduce my intake!", "No - I drink sparingly/not at all");
+                dQuery.buttonChoiceCreator("Yes - I will reduce my intake!", "No - I drink sparingly/not at all");
                 buttonListenerUpdater("Alcohol ✔");            
                 getProgressBar(step);
                 break;
@@ -263,7 +260,7 @@ function happinessGenerator (step) {
                 dQuery.contentUpdater("Other drugs can also lead to anxiety, stress and mental unwellness, specially when deprived of their use. " + 
                 "If this applies to you, and considering you're here to try to feel better, you may consider asking for professional help to " +
                 "reduce intake and assist you. Professional help is essential in this step.", "Do you use any other drugs or stimulating substances?");
-                buttonChoiceCreator("Yes - I will call a doctor and get help", "No - I don't use other substances");
+                dQuery.buttonChoiceCreator("Yes - I will call a doctor and get help", "No - I don't use other substances");
                 buttonListenerUpdater("Drugs ✔");            
                 getProgressBar(step);
             break;
@@ -277,7 +274,7 @@ function happinessGenerator (step) {
                 "and can also be social - such as team sports, cycling, running, gym (these will also solve your need for exercise) " + 
                 "or working and helping a charity/cause you have interested. You're not alone! It can be overwhelmingly at the beggnining, but " + 
                 "A psycologist may help you and complement on your quest to social well being.", "Do you have friends or people you can talk to and share a bond?");
-                buttonChoiceCreator("No - I will work on getting more social contact", "Yes - I have someone or group of support");
+                dQuery.buttonChoiceCreator("No - I will work on getting more social contact", "Yes - I have someone or group of support");
                 buttonListenerUpdater("Social ✔");            
                 getProgressBar(step);
             break;
@@ -292,7 +289,7 @@ function happinessGenerator (step) {
                 "reduce your work time right now, but realizing that this is affecting you can put you in a path to make choices that wil eventually lead " + 
                 "to a better work life, such as looking for a better employer, better pay, or chaning careers entirely - it's up to you!", 
                 "Has your work-life been unbalanced lately? ");
-                buttonChoiceCreator("Yes - I will work on changing to a better work-life balance", "No - I have a good work-life balance");
+                dQuery.buttonChoiceCreator("Yes - I will work on changing to a better work-life balance", "No - I have a good work-life balance");
                 buttonListenerUpdater();            
                 getProgressBar(step);
             break;             
@@ -300,14 +297,14 @@ function happinessGenerator (step) {
             dQuery.sidebarUpdater(("previous: ✔"));
             dQuery.contentUpdater("Even though rarely, some medications could have side effects that may affect your energy levels and mood. " + 
             "If you take any medication, please contact your doctor to check out if they could be affecting you.", "Do you take any kind of medications?");
-            buttonChoiceCreator("Yes - I will contact my doctor", "No");
+            dQuery.buttonChoiceCreator("Yes - I will contact my doctor", "No");
             buttonListenerUpdater();            
             break;
  */
 /*         case x:
             dQuery.sidebarUpdater(("previous: ✔"));
             dQuery.contentUpdater("");
-            buttonChoiceCreator("", "");
+            dQuery.buttonChoiceCreator("", "");
             buttonListenerUpdater();            
             break; */
         }
