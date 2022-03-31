@@ -13,6 +13,7 @@ let showWarning = true;
 let progressBarExists = false;
 
 // handles existing DOM QuerySelectors
+// creates and updates DOM elements
 const dQuery = (function () {
     const button1 = document.querySelector("#button1");
     const button2 = document.querySelector("#button2");
@@ -25,26 +26,28 @@ const dQuery = (function () {
     const header = document.querySelector(".header");
     const body = document.querySelector("body");
 
+    const sidebarUpdater = (test) => {
+        result = document.createElement("p");
+        result.setAttribute("class", "resultProgress");
+        result.textContent = test;
+        sidebar.appendChild(result);
+    }
+
+    const contentUpdater = (arg1, arg2) => {
+        /* removes title if exists */
+        if (body.contains(dQuery.initialTitle)) {
+            main.removeChild(dQuery.initialTitle);
+        }
+        content.textContent = arg1;
+        introQuest.textContent = arg2;
+    }
+
     return {
         button1, button2, buttons, container, content, 
-        introQuest, initialTitle, main, header, body,
+        introQuest, initialTitle, main, header, body, sidebarUpdater, contentUpdater,
     }
 })(); 
 
-sidebarUpdater = (test) => {
-    result = document.createElement("p");
-    result.setAttribute("class", "resultProgress");
-    result.textContent = test;
-    sidebar.appendChild(result);
-}
-contentUpdater = (arg1, arg2) => {
-    /* removes title if exists */
-    if (dQuery.body.contains(dQuery.initialTitle)) {
-        dQuery.main.removeChild(dQuery.initialTitle);
-    }
-    dQuery.content.textContent = arg1;
-    dQuery.introQuest.textContent = arg2;
-}
 buttonUpdater = (arg1, arg2) => {
     dQuery.button1;
     dQuery.button2;
@@ -109,7 +112,7 @@ feelsBetterHandler = () => {
     const text1 = "congratulations! You've solved your problem! Remember, well being is a process. If you're not feeling well most of the times, you " + 
     "may need to put more thought into what you can do on your routine to feel better often.";
     const text2 = "come back whenever you need it =)";
-    contentUpdater(text1, text2);
+    dQuery.contentUpdater(text1, text2);
     dQuery.buttons.innerHTML="";
 };
 /* Updates button text and action for every question*/
@@ -127,7 +130,7 @@ function buttonListenerUpdater (arg) {
 }
 /*handles "are you better" question */ 
 function intermediaryStep (arg) {
-    contentUpdater(arg, "Are you feeling better now?")
+    dQuery.contentUpdater(arg, "Are you feeling better now?")
     buttonChoiceCreator("No 😐", "Yes! 😀");
     btn3.addEventListener("click", () => {
         if (feelsBetter) {
@@ -196,15 +199,15 @@ function happinessGenerator (step) {
     if (feelsBetter) return;
     switch (step) {
         case 0:
-            contentUpdater("Water is essential to all biologic activties. Lack of proper hydration can lead to mood swings, headaches and " +
+            dQuery.contentUpdater("Water is essential to all biologic activties. Lack of proper hydration can lead to mood swings, headaches and " +
             "being tired. Over the long run, it can also worsen other health conditions.", "Did you drink water in the past few hours?")
             buttonChoiceCreator("No - I will drink now", "Yes, I'm hydrated!");
             buttonListenerUpdater("Water ✔");
             getProgressBar(step);
             break;
         case 1:
-            sidebarUpdater("Water ✔");
-            contentUpdater("A well balanced diet can keep you nourished for hours. " + 
+            dQuery.sidebarUpdater("Water ✔");
+            dQuery.contentUpdater("A well balanced diet can keep you nourished for hours. " + 
             "Some people may feel tired, fatigue and headaches after a few hours from the last meal." + 
             " Some people also feel lack of motivation and mood swings after a few days eating less than ideal calories. Please make sure you have been eating properly!", "Have you been eating well lately?")
             buttonChoiceCreator("No - I will eat something!", "Yes - I'm well fed");
@@ -212,8 +215,8 @@ function happinessGenerator (step) {
             getProgressBar(step);      
             break;
         case 2:
-            sidebarUpdater("Food ✔");
-            contentUpdater("Everyone needs to sleep well and most people need from 6 to 9 hours of sleep a day to feel rested - how much hours for you, " +
+            dQuery.sidebarUpdater("Food ✔");
+            dQuery.contentUpdater("Everyone needs to sleep well and most people need from 6 to 9 hours of sleep a day to feel rested - how much hours for you, " +
             "you probably have a range of hours that are resting and fulfilling. " + "It may not be possible to sleep as many hours as you wish everyday, " +
             "but overrall on your week, you need to be rested on a weekly or even monthly basis " + "to avoid being stressed and burned out. " +
             "If you are in a stressfull and demanding moment of your life, " + "such as raising a newborn or workin govertime, it can be challenging or not possible at all to sleep more hours, " + 
@@ -224,8 +227,8 @@ function happinessGenerator (step) {
             getProgressBar(step);
             break;
         case 3:
-            sidebarUpdater("Sleep ✔");
-            contentUpdater("Resistance trainning, at least twice a week, and aerobic trainning at least 120 minutes a week, is essential for well being " + 
+            dQuery.sidebarUpdater("Sleep ✔");
+            dQuery.contentUpdater("Resistance trainning, at least twice a week, and aerobic trainning at least 120 minutes a week, is essential for well being " + 
             "in a modern sedentary lifestyle. The older you get, the more you need to have a solid exercise routine to keep up your " + 
             "quality of life. Good news is, even if you haven't exercised at all before, starting NOW can have positive effects on your " + 
             "life", "Have you been doing resistance and aerobic exercises in the past days?");
@@ -234,8 +237,8 @@ function happinessGenerator (step) {
             getProgressBar(step);
             break;
         case 4:
-            sidebarUpdater("Exercise ✔");
-            contentUpdater("Caffeine is a double edged sword - while it may help you with energy and mood throughout your morning and work day, " + 
+            dQuery.sidebarUpdater("Exercise ✔");
+            dQuery.contentUpdater("Caffeine is a double edged sword - while it may help you with energy and mood throughout your morning and work day, " + 
             "it can cause headaches and induce stress at certain levels. For some people, caffeine may look like it doesn't affect them at all, " + 
             "but the absence of caffeine can induce withdrawal symptoms like headaches and tiredness. If you need to take much more " + 
             "than the equivalent of a few cups of espresso a day, it may be affecting your overrall mood and/or sleep quality. Please note that " + 
@@ -246,8 +249,8 @@ function happinessGenerator (step) {
             getProgressBar(step);
             break; 
             case 5:
-                sidebarUpdater("Caffeine ✔");
-                contentUpdater("Alcohol consumption can lead to anxiety and stress as the brain tries to counter act the " + 
+                dQuery.sidebarUpdater("Caffeine ✔");
+                dQuery.contentUpdater("Alcohol consumption can lead to anxiety and stress as the brain tries to counter act the " + 
                 "depressive effects it has. Mentally, alcohol may lower sleep quality, lower inhibitions and lead to awkward social situations, short term memory loss and unexpected " + 
                 "2AM calls. While most people can moderate and drink socially, some people may not notice how much alcohol consumption - specially " + 
                 "daily - may be affecting their quality of life.", "Have you been drinking more than the equivalent of a beer daily for the past days?");
@@ -256,8 +259,8 @@ function happinessGenerator (step) {
                 getProgressBar(step);
                 break;
             case 6:
-                sidebarUpdater(("Alcohol ✔"));
-                contentUpdater("Other drugs can also lead to anxiety, stress and mental unwellness, specially when deprived of their use. " + 
+                dQuery.sidebarUpdater(("Alcohol ✔"));
+                dQuery.contentUpdater("Other drugs can also lead to anxiety, stress and mental unwellness, specially when deprived of their use. " + 
                 "If this applies to you, and considering you're here to try to feel better, you may consider asking for professional help to " +
                 "reduce intake and assist you. Professional help is essential in this step.", "Do you use any other drugs or stimulating substances?");
                 buttonChoiceCreator("Yes - I will call a doctor and get help", "No - I don't use other substances");
@@ -265,8 +268,8 @@ function happinessGenerator (step) {
                 getProgressBar(step);
             break;
             case 7:
-                sidebarUpdater("Drugs ✔");
-                contentUpdater("Humans are social creatures! Some people may need a lot of social contact and interaction daily, while others feel better " + 
+                dQuery.sidebarUpdater("Drugs ✔");
+                dQuery.contentUpdater("Humans are social creatures! Some people may need a lot of social contact and interaction daily, while others feel better " + 
                 "when they're alone in their house relaxing. However, everyone eventually need social contact, specially form their friends and loved " + 
                 "ones. Having at least someone you can talk to and share experiences together helps you feel mentally better in the long run. " + 
                 "If you ever felt lonely at home, but also felt like you wanted to go home when you're at social gatherings, you understand " + 
@@ -279,8 +282,8 @@ function happinessGenerator (step) {
                 getProgressBar(step);
             break;
             case 8:
-                sidebarUpdater("Social ✔");
-                contentUpdater("Working is a huge part of the modern life. We often spend much more time working than on leisure time, or time " +
+                dQuery.sidebarUpdater("Social ✔");
+                dQuery.contentUpdater("Working is a huge part of the modern life. We often spend much more time working than on leisure time, or time " +
                 "with family and friends, may it be a conscious choice - working more to get a promotion - or an mandatory one by the employer. " + 
                 "Work-life balance has only recently been the focus of research, and the COVID pandemic's increase in remote working has led to a lot fo people " + 
                 "realizing that they could have a better work-life balance. " + "If you're currently under stress from work, if possible, you may try to ease a little " + 
@@ -294,16 +297,16 @@ function happinessGenerator (step) {
                 getProgressBar(step);
             break;             
         /* case 10:
-            sidebarUpdater(("previous: ✔"));
-            contentUpdater("Even though rarely, some medications could have side effects that may affect your energy levels and mood. " + 
+            dQuery.sidebarUpdater(("previous: ✔"));
+            dQuery.contentUpdater("Even though rarely, some medications could have side effects that may affect your energy levels and mood. " + 
             "If you take any medication, please contact your doctor to check out if they could be affecting you.", "Do you take any kind of medications?");
             buttonChoiceCreator("Yes - I will contact my doctor", "No");
             buttonListenerUpdater();            
             break;
  */
 /*         case x:
-            sidebarUpdater(("previous: ✔"));
-            contentUpdater("");
+            dQuery.sidebarUpdater(("previous: ✔"));
+            dQuery.contentUpdater("");
             buttonChoiceCreator("", "");
             buttonListenerUpdater();            
             break; */
