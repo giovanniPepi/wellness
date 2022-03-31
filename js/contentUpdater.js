@@ -6,20 +6,29 @@ let step = 0;
     steps.push(null);
     return steps.length;    
 } */
+
 let sideBarExists = false;
 let sideHeaderExists = false;
 let showWarning = true;
 let progressBarExists = false;
 
-const button1 = document.querySelector("#button1");
-const button2 = document.querySelector("#button2");
-const buttons = document.querySelector(".buttons"); 
-const container = document.querySelector(".container");
-const content = document.querySelector(".content");
-const introQuest = document.querySelector(".introQuestion");
-const initialTitle = document.querySelector(".initialTitle");
-const main = document.querySelector(".main");
-const header = document.querySelector(".header");
+const domQuery = (function () {
+    const button1 = document.querySelector("#button1");
+    const button2 = document.querySelector("#button2");
+    const buttons = document.querySelector(".buttons"); 
+    const container = document.querySelector(".container");
+    const content = document.querySelector(".content");
+    const introQuest = document.querySelector(".introQuestion");
+    const initialTitle = document.querySelector(".initialTitle");
+    const main = document.querySelector(".main");
+    const header = document.querySelector(".header");
+    const body = document.querySelector("body");
+
+    return {
+        button1, button2, buttons, container, content, 
+        introQuest, initialTitle, main, header, body,
+    }
+})(); 
 
 sidebarUpdater = (test) => {
     result = document.createElement("p");
@@ -29,13 +38,15 @@ sidebarUpdater = (test) => {
 }
 contentUpdater = (arg1, arg2) => {
     /* removes title if exists */
-    if (document.body.contains(initialTitle)) {
-        main.removeChild(initialTitle);
+    if (domQuery.body.contains(domQuery.initialTitle)) {
+        domQuery.main.removeChild(domQuery.initialTitle);
     }
     content.textContent = arg1;
-    introQuest.textContent = arg2;
+    domQuery.introQuest.textContent = arg2;
 }
 buttonUpdater = (arg1, arg2) => {
+    domQuery.button1;
+    domQuery.button2;
     button1.textContent = arg1;
     button2.textContent = arg2;
 }
@@ -170,11 +181,11 @@ warningHandler = () => {
         warning.style.fontSize = ".6rem";
         warning.textContent = "Wellness test is not medical advice, nor should replace" +
         " your doctors orders";
-        main.appendChild(warning);
+        domQuery.main.appendChild(warning);
         showWarning = false;
     } else {
         const warning = document.querySelector(".warning");    
-        if (!showWarning && main.contains(warning)) main.removeChild(warning);
+        if (!showWarning && domQuery.main.contains(warning)) domQuery.main.removeChild(warning);
     }
 }
 /* PLEASE INCLUDE SOURCES! */
