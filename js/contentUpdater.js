@@ -1,4 +1,11 @@
 let step = 0;
+
+/* stepCounter = (step) => {
+    const steps = [];
+    console.log("Increasing step: ");
+    steps.push(null);
+    return steps.length;    
+} */
 let sideBarExists = false;
 let sideHeaderExists = false;
 let showWarning = true;
