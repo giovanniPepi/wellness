@@ -12,7 +12,8 @@ let sideHeaderExists = false;
 let showWarning = true;
 let progressBarExists = false;
 
-const domQuery = (function () {
+// handles existing DOM QuerySelectors
+const dQuery = (function () {
     const button1 = document.querySelector("#button1");
     const button2 = document.querySelector("#button2");
     const buttons = document.querySelector(".buttons"); 
@@ -38,28 +39,28 @@ sidebarUpdater = (test) => {
 }
 contentUpdater = (arg1, arg2) => {
     /* removes title if exists */
-    if (domQuery.body.contains(domQuery.initialTitle)) {
-        domQuery.main.removeChild(domQuery.initialTitle);
+    if (dQuery.body.contains(dQuery.initialTitle)) {
+        dQuery.main.removeChild(dQuery.initialTitle);
     }
-    content.textContent = arg1;
-    domQuery.introQuest.textContent = arg2;
+    dQuery.content.textContent = arg1;
+    dQuery.introQuest.textContent = arg2;
 }
 buttonUpdater = (arg1, arg2) => {
-    domQuery.button1;
-    domQuery.button2;
+    dQuery.button1;
+    dQuery.button2;
     button1.textContent = arg1;
     button2.textContent = arg2;
 }
 buttonChoiceCreator = (arg1, arg2) => {
-    buttons.innerHTML="";
+    dQuery.buttons.innerHTML="";
     btn3 = document.createElement("button");
     btn3.setAttribute("class", "button");
     btn4 = document.createElement("button");
     btn4.setAttribute("class", "button");
     btn3.textContent = arg1;
     btn4.textContent = arg2;
-    buttons.appendChild(btn3);
-    buttons.appendChild(btn4);
+    dQuery.buttons.appendChild(btn3);
+    dQuery.buttons.appendChild(btn4);
 };
 getSideBarGrid = () => {
     if (!sideBarExists) {        
@@ -74,7 +75,7 @@ getSideBarGrid = () => {
         sidebar.style.gap = ".5rem";        
         sidebar.style.flexWrap = "wrap";
         sidebar.style.fontSize = ".8rem";
-        container.appendChild(sidebar);
+        dQuery.container.appendChild(sidebar);
         sideBarExists = true;        
     }
     if (step < 1 ) {
@@ -109,7 +110,7 @@ feelsBetterHandler = () => {
     "may need to put more thought into what you can do on your routine to feel better often.";
     const text2 = "come back whenever you need it =)";
     contentUpdater(text1, text2);
-    buttons.innerHTML="";
+    dQuery.buttons.innerHTML="";
 };
 /* Updates button text and action for every question*/
 function buttonListenerUpdater (arg) {
@@ -159,7 +160,7 @@ getProgressBar = (step) => {
         progress.style.width = ".1vw"
 
         progressBar.appendChild(progress);
-        container.insertBefore(progressBar, main);    
+        dQuery.container.insertBefore(progressBar, dQuery.main);    
 
         progressBarExists = true;
     }
@@ -181,11 +182,11 @@ warningHandler = () => {
         warning.style.fontSize = ".6rem";
         warning.textContent = "Wellness test is not medical advice, nor should replace" +
         " your doctors orders";
-        domQuery.main.appendChild(warning);
+        dQuery.main.appendChild(warning);
         showWarning = false;
     } else {
         const warning = document.querySelector(".warning");    
-        if (!showWarning && domQuery.main.contains(warning)) domQuery.main.removeChild(warning);
+        if (!showWarning && dQuery.main.contains(warning)) dQuery.main.removeChild(warning);
     }
 }
 /* PLEASE INCLUDE SOURCES! */
