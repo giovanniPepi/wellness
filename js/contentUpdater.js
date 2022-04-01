@@ -63,7 +63,6 @@ const dQuery = (function () {
         result.textContent = test;
         sidebar.appendChild(result);
     };  
-
     const contentUpdater = (arg1, arg2) => {
         /* removes title if exists */
         if (body.contains(initialTitle)) {
@@ -87,13 +86,43 @@ const dQuery = (function () {
         buttons.appendChild(btn3);
         buttons.appendChild(btn4);
     };
+    /* handles and update progressbar after every question */ 
+    const getProgressBar = (step) => {
+        if (!progressBarExists) {
+            const progressBar = document.createElement("div");
+            progressBar.setAttribute("class", "progressBar");
+            progressBar.style.height = ".3rem";
+            progressBar.style.gridRow = " 3 / 4";
+            progressBar.style.gridColumn = "1/2";
+            progressBar.style.transition = "width 1s";
+
+            const progress = document.createElement('div');
+            progress.setAttribute("class", "progress");
+            progress.style.height = "inherit";
+            progress.style.background = "var(--greenP)";
+            progress.style.width = ".1vw"
+
+            progressBar.appendChild(progress);
+            container.insertBefore(progressBar, dQuery.main);    
+
+            progressBarExists = true;
+        };
+
+        progress = document.querySelector(".progress");
+        if (step <= 10) {
+            let increase = step * 10;
+            progress.style.width = `${increase}vw`;
+        } else {
+            progress.style.width = "100vw";
+        }
+    }
 
 
     return {
         button1, button2, buttons, container, content, 
         introQuest, initialTitle, main, header, body, sidebarUpdater, 
         contentUpdater, buttonUpdater, buttonChoiceCreator, getSideBarGrid, 
-        sidebarUpdater,
+        sidebarUpdater, getProgressBar,
     }
 })(); 
 
@@ -109,7 +138,7 @@ const handleListener = (function () {
         dQuery.contentUpdater(text1, text2);
         dQuery.buttons.innerHTML="";
     };
-    
+
     const choiceHandler = () => {    
         dQuery.button1.addEventListener("click", () => {
             feelsBetter = false;
@@ -133,61 +162,32 @@ const handleListener = (function () {
             step++
             happinessGenerator(step);        
         })
-}
+    }
+
+    /*handles "are you better" question */ 
+    function intermediaryStep (arg) {
+        dQuery.contentUpdater(arg, "Are you feeling better now?")
+        dQuery.buttonChoiceCreator("No 😐", "Yes! 😀");
+        btn3.addEventListener("click", () => {
+            if (feelsBetter) {feelsBetterHandler();} 
+            else {
+                step++;
+                dQuery.getSideBarGrid();
+                dQuery.sidebarUpdater();
+                happinessGenerator(step);
+            };
+        });
+        btn4.addEventListener("click", () => {
+            feelsBetter = true;
+            feelsBetterHandler();        
+        })    
+    }
+
     return {
         feelsBetterHandler, choiceHandler, buttonListenerUpdater,
     }  
 })();
 
-
-/*handles "are you better" question */ 
-function intermediaryStep (arg) {
-    dQuery.contentUpdater(arg, "Are you feeling better now?")
-    dQuery.buttonChoiceCreator("No 😐", "Yes! 😀");
-    btn3.addEventListener("click", () => {
-        if (feelsBetter) {
-            handleListener.feelsBetterHandler();  
-        } else {
-            step++;
-            dQuery.getSideBarGrid();
-            dQuery.sidebarUpdater();
-            happinessGenerator(step);
-        };
-    });
-    btn4.addEventListener("click", () => {
-        feelsBetter = true;
-        handleListener.feelsBetterHandler();        
-    })    
-}
-/* handles and update progressbar after every question */ 
-getProgressBar = (step) => {
-    if (!progressBarExists) {
-        const progressBar = document.createElement("div");
-        progressBar.setAttribute("class", "progressBar");
-        progressBar.style.height = ".3rem";
-        progressBar.style.gridRow = " 3 / 4";
-        progressBar.style.gridColumn = "1/2";
-        progressBar.style.transition = "width 1s";
-
-        const progress = document.createElement('div');
-        progress.setAttribute("class", "progress");
-        progress.style.height = "inherit";
-        progress.style.background = "var(--greenP)";
-        progress.style.width = ".1vw"
-
-        progressBar.appendChild(progress);
-        dQuery.container.insertBefore(progressBar, dQuery.main);    
-
-        progressBarExists = true;
-    }
-    progress = document.querySelector(".progress");
-    if (step <= 10) {
-        let increase = step * 10;
-        progress.style.width = `${increase}vw`;
-    } else {
-        progress.style.width = "100vw";
-    }
-}
 /* creates/remove warning based on boolean*/
 warningHandler = () => {
     if (showWarning) {
@@ -216,7 +216,7 @@ function happinessGenerator (step) {
             "being tired. Over the long run, it can also worsen other health conditions.", "Did you drink water in the past few hours?")
             dQuery.buttonChoiceCreator("No - I will drink now", "Yes, I'm hydrated!");
             handleListener.buttonListenerUpdater("Water ✔");
-            getProgressBar(step);
+            dQuery.getProgressBar(step);
             break;
         case 1:
             dQuery.sidebarUpdater("Water ✔");
@@ -225,7 +225,7 @@ function happinessGenerator (step) {
             " Some people also feel lack of motivation and mood swings after a few days eating less than ideal calories. Please make sure you have been eating properly!", "Have you been eating well lately?")
             dQuery.buttonChoiceCreator("No - I will eat something!", "Yes - I'm well fed");
             handleListener.buttonListenerUpdater("Food ✔");      
-            getProgressBar(step);      
+            dQuery.getProgressBar(step);      
             break;
         case 2:
             dQuery.sidebarUpdater("Food ✔");
@@ -237,7 +237,7 @@ function happinessGenerator (step) {
              "These minutes can add up to some hours over weeks and contribute to your well being.", "Have you been sleeping well?");
             dQuery.buttonChoiceCreator("No - I will take a nap or try to sleep more", "Yes - I've been sleeping well!");
             handleListener.buttonListenerUpdater("Sleep ✔");            
-            getProgressBar(step);
+            dQuery.getProgressBar(step);
             break;
         case 3:
             dQuery.sidebarUpdater("Sleep ✔");
@@ -247,7 +247,7 @@ function happinessGenerator (step) {
             "life", "Have you been doing resistance and aerobic exercises in the past days?");
             dQuery.buttonChoiceCreator("No - I will start exercising!", "Yes - I exercise regularly!");
             handleListener.buttonListenerUpdater("Exercise: ✔");            
-            getProgressBar(step);
+            dQuery.getProgressBar(step);
             break;
         case 4:
             dQuery.sidebarUpdater("Exercise ✔");
@@ -259,7 +259,7 @@ function happinessGenerator (step) {
             "Have you been intaking a lot of caffeine in the past days?");
             dQuery.buttonChoiceCreator("Yes - I will reduce caffeine intake", "No - I don't drink too much/at all caffeine");
             handleListener.buttonListenerUpdater("Caffeine ✔");            
-            getProgressBar(step);
+            dQuery.getProgressBar(step);
             break; 
             case 5:
                 dQuery.sidebarUpdater("Caffeine ✔");
@@ -269,7 +269,7 @@ function happinessGenerator (step) {
                 "daily - may be affecting their quality of life.", "Have you been drinking more than the equivalent of a beer daily for the past days?");
                 dQuery.buttonChoiceCreator("Yes - I will reduce my intake!", "No - I drink sparingly/not at all");
                 handleListener.buttonListenerUpdater("Alcohol ✔");            
-                getProgressBar(step);
+                dQuery.getProgressBar(step);
                 break;
             case 6:
                 dQuery.sidebarUpdater(("Alcohol ✔"));
@@ -278,7 +278,7 @@ function happinessGenerator (step) {
                 "reduce intake and assist you. Professional help is essential in this step.", "Do you use any other drugs or stimulating substances?");
                 dQuery.buttonChoiceCreator("Yes - I will call a doctor and get help", "No - I don't use other substances");
                 handleListener.buttonListenerUpdater("Drugs ✔");            
-                getProgressBar(step);
+                dQuery.getProgressBar(step);
             break;
             case 7:
                 dQuery.sidebarUpdater("Drugs ✔");
@@ -292,7 +292,7 @@ function happinessGenerator (step) {
                 "A psycologist may help you and complement on your quest to social well being.", "Do you have friends or people you can talk to and share a bond?");
                 dQuery.buttonChoiceCreator("No - I will work on getting more social contact", "Yes - I have someone or group of support");
                 handleListener.buttonListenerUpdater("Social ✔");            
-                getProgressBar(step);
+                dQuery.getProgressBar(step);
             break;
             case 8:
                 dQuery.sidebarUpdater("Social ✔");
@@ -307,22 +307,8 @@ function happinessGenerator (step) {
                 "Has your work-life been unbalanced lately? ");
                 dQuery.buttonChoiceCreator("Yes - I will work on changing to a better work-life balance", "No - I have a good work-life balance");
                 handleListener.buttonListenerUpdater();            
-                getProgressBar(step);
-            break;             
-        /* case 10:
-            dQuery.sidebarUpdater(("previous: ✔"));
-            dQuery.contentUpdater("Even though rarely, some medications could have side effects that may affect your energy levels and mood. " + 
-            "If you take any medication, please contact your doctor to check out if they could be affecting you.", "Do you take any kind of medications?");
-            dQuery.buttonChoiceCreator("Yes - I will contact my doctor", "No");
-            handleListener.buttonListenerUpdater();            
-            break;
- */
-/*         case x:
-            dQuery.sidebarUpdater(("previous: ✔"));
-            dQuery.contentUpdater("");
-            dQuery.buttonChoiceCreator("", "");
-            handleListener.buttonListenerUpdater();            
-            break; */
+                dQuery.getProgressBar(step);
+            break;   
         }
 }
 handleListener.choiceHandler();
