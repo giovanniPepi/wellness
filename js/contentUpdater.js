@@ -116,13 +116,28 @@ const dQuery = (function () {
             progress.style.width = "100vw";
         }
     }
-
+    const warningHandler = () => {
+        if (showWarning) {
+            const warning = document.createElement("p");
+            warning.setAttribute("class", "warning");
+            warning.style.gridColumn = "1/3";
+            warning.style.gridRow = "6 / 6";
+            warning.style.fontSize = ".6rem";
+            warning.textContent = "Wellness test is not medical advice, nor should replace" +
+            " your doctors orders";
+            main.appendChild(warning);
+            showWarning = false;
+        } else {
+            const warning = document.querySelector(".warning");    
+            if (!showWarning && main.contains(warning)) main.removeChild(warning);
+        }
+    }
 
     return {
         button1, button2, buttons, container, content, 
         introQuest, initialTitle, main, header, body, sidebarUpdater, 
         contentUpdater, buttonUpdater, buttonChoiceCreator, getSideBarGrid, 
-        sidebarUpdater, getProgressBar,
+        sidebarUpdater, getProgressBar, warningHandler,
     }
 })(); 
 
@@ -189,26 +204,11 @@ const handleListener = (function () {
 })();
 
 /* creates/remove warning based on boolean*/
-warningHandler = () => {
-    if (showWarning) {
-        const warning = document.createElement("p");
-        warning.setAttribute("class", "warning");
-        warning.style.gridColumn = "1/3";
-        warning.style.gridRow = "6 / 6";
-        warning.style.fontSize = ".6rem";
-        warning.textContent = "Wellness test is not medical advice, nor should replace" +
-        " your doctors orders";
-        dQuery.main.appendChild(warning);
-        showWarning = false;
-    } else {
-        const warning = document.querySelector(".warning");    
-        if (!showWarning && dQuery.main.contains(warning)) dQuery.main.removeChild(warning);
-    }
-}
+
 /* PLEASE INCLUDE SOURCES! */
 function happinessGenerator (step) {
     // removes warning
-    warningHandler();
+    dQuery.warningHandler();
     if (feelsBetter) return;
     switch (step) {
         case 0:
@@ -312,7 +312,7 @@ function happinessGenerator (step) {
         }
 }
 handleListener.choiceHandler();
-warningHandler();
+dQuery.warningHandler();
 
 
 
