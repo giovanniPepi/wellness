@@ -120,24 +120,26 @@ const handleListener = (function () {
             handleListener.feelsBetterHandler();
         });
     }
-
+    /* Updates button text and action for every question*/
+    /* btn3 and 4 are created before therefore can be acessed when 
+    this is called*/ 
+    const buttonListenerUpdater = (arg) => {
+        btn3.addEventListener("click", () => {
+            if (feelsBetter) {
+                handleListener.feelsBetterHandler();     
+            } else intermediaryStep (arg);
+        });
+        btn4.addEventListener("click", () => {
+            step++
+            happinessGenerator(step);        
+        })
+}
     return {
-        feelsBetterHandler, choiceHandler,
+        feelsBetterHandler, choiceHandler, buttonListenerUpdater,
     }  
 })();
 
-/* Updates button text and action for every question*/
-function buttonListenerUpdater (arg) {
-    btn3.addEventListener("click", () => {
-        if (feelsBetter) {
-            handleListener.feelsBetterHandler();     
-        } else intermediaryStep (arg);
-    });
-    btn4.addEventListener("click", () => {
-        step++
-        happinessGenerator(step);        
-    })
-}
+
 /*handles "are you better" question */ 
 function intermediaryStep (arg) {
     dQuery.contentUpdater(arg, "Are you feeling better now?")
@@ -213,7 +215,7 @@ function happinessGenerator (step) {
             dQuery.contentUpdater("Water is essential to all biologic activties. Lack of proper hydration can lead to mood swings, headaches and " +
             "being tired. Over the long run, it can also worsen other health conditions.", "Did you drink water in the past few hours?")
             dQuery.buttonChoiceCreator("No - I will drink now", "Yes, I'm hydrated!");
-            buttonListenerUpdater("Water ✔");
+            handleListener.buttonListenerUpdater("Water ✔");
             getProgressBar(step);
             break;
         case 1:
@@ -222,7 +224,7 @@ function happinessGenerator (step) {
             "Some people may feel tired, fatigue and headaches after a few hours from the last meal." + 
             " Some people also feel lack of motivation and mood swings after a few days eating less than ideal calories. Please make sure you have been eating properly!", "Have you been eating well lately?")
             dQuery.buttonChoiceCreator("No - I will eat something!", "Yes - I'm well fed");
-            buttonListenerUpdater("Food ✔");      
+            handleListener.buttonListenerUpdater("Food ✔");      
             getProgressBar(step);      
             break;
         case 2:
@@ -234,7 +236,7 @@ function happinessGenerator (step) {
              "however if you are not feeling well - and that's why you're here - you may try to squeeze a few minutes of sleep on your routine. " + 
              "These minutes can add up to some hours over weeks and contribute to your well being.", "Have you been sleeping well?");
             dQuery.buttonChoiceCreator("No - I will take a nap or try to sleep more", "Yes - I've been sleeping well!");
-            buttonListenerUpdater("Sleep ✔");            
+            handleListener.buttonListenerUpdater("Sleep ✔");            
             getProgressBar(step);
             break;
         case 3:
@@ -244,7 +246,7 @@ function happinessGenerator (step) {
             "quality of life. Good news is, even if you haven't exercised at all before, starting NOW can have positive effects on your " + 
             "life", "Have you been doing resistance and aerobic exercises in the past days?");
             dQuery.buttonChoiceCreator("No - I will start exercising!", "Yes - I exercise regularly!");
-            buttonListenerUpdater("Exercise: ✔");            
+            handleListener.buttonListenerUpdater("Exercise: ✔");            
             getProgressBar(step);
             break;
         case 4:
@@ -256,7 +258,7 @@ function happinessGenerator (step) {
             "Coke, Green and Black Tea, Chocolate and other beverages also have a non negligible amount of caffeine in them and can add up to your intake.", 
             "Have you been intaking a lot of caffeine in the past days?");
             dQuery.buttonChoiceCreator("Yes - I will reduce caffeine intake", "No - I don't drink too much/at all caffeine");
-            buttonListenerUpdater("Caffeine ✔");            
+            handleListener.buttonListenerUpdater("Caffeine ✔");            
             getProgressBar(step);
             break; 
             case 5:
@@ -266,7 +268,7 @@ function happinessGenerator (step) {
                 "2AM calls. While most people can moderate and drink socially, some people may not notice how much alcohol consumption - specially " + 
                 "daily - may be affecting their quality of life.", "Have you been drinking more than the equivalent of a beer daily for the past days?");
                 dQuery.buttonChoiceCreator("Yes - I will reduce my intake!", "No - I drink sparingly/not at all");
-                buttonListenerUpdater("Alcohol ✔");            
+                handleListener.buttonListenerUpdater("Alcohol ✔");            
                 getProgressBar(step);
                 break;
             case 6:
@@ -275,7 +277,7 @@ function happinessGenerator (step) {
                 "If this applies to you, and considering you're here to try to feel better, you may consider asking for professional help to " +
                 "reduce intake and assist you. Professional help is essential in this step.", "Do you use any other drugs or stimulating substances?");
                 dQuery.buttonChoiceCreator("Yes - I will call a doctor and get help", "No - I don't use other substances");
-                buttonListenerUpdater("Drugs ✔");            
+                handleListener.buttonListenerUpdater("Drugs ✔");            
                 getProgressBar(step);
             break;
             case 7:
@@ -289,7 +291,7 @@ function happinessGenerator (step) {
                 "or working and helping a charity/cause you have interested. You're not alone! It can be overwhelmingly at the beggnining, but " + 
                 "A psycologist may help you and complement on your quest to social well being.", "Do you have friends or people you can talk to and share a bond?");
                 dQuery.buttonChoiceCreator("No - I will work on getting more social contact", "Yes - I have someone or group of support");
-                buttonListenerUpdater("Social ✔");            
+                handleListener.buttonListenerUpdater("Social ✔");            
                 getProgressBar(step);
             break;
             case 8:
@@ -304,7 +306,7 @@ function happinessGenerator (step) {
                 "to a better work life, such as looking for a better employer, better pay, or chaning careers entirely - it's up to you!", 
                 "Has your work-life been unbalanced lately? ");
                 dQuery.buttonChoiceCreator("Yes - I will work on changing to a better work-life balance", "No - I have a good work-life balance");
-                buttonListenerUpdater();            
+                handleListener.buttonListenerUpdater();            
                 getProgressBar(step);
             break;             
         /* case 10:
@@ -312,14 +314,14 @@ function happinessGenerator (step) {
             dQuery.contentUpdater("Even though rarely, some medications could have side effects that may affect your energy levels and mood. " + 
             "If you take any medication, please contact your doctor to check out if they could be affecting you.", "Do you take any kind of medications?");
             dQuery.buttonChoiceCreator("Yes - I will contact my doctor", "No");
-            buttonListenerUpdater();            
+            handleListener.buttonListenerUpdater();            
             break;
  */
 /*         case x:
             dQuery.sidebarUpdater(("previous: ✔"));
             dQuery.contentUpdater("");
             dQuery.buttonChoiceCreator("", "");
-            buttonListenerUpdater();            
+            handleListener.buttonListenerUpdater();            
             break; */
         }
 }
