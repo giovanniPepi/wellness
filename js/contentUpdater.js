@@ -25,7 +25,6 @@ const dQuery = (function () {
     const header = document.querySelector(".header");
     const body = document.querySelector("body");
 
-
     const getSideBarGrid = () => {
         if (!sideBarExists) {        
             sidebar = document.createElement("div");
@@ -110,25 +109,22 @@ const handleListener = (function () {
         dQuery.contentUpdater(text1, text2);
         dQuery.buttons.innerHTML="";
     };
-
-    return {
-        feelsBetterHandler,
+    
+    const choiceHandler = () => {    
+        dQuery.button1.addEventListener("click", () => {
+            feelsBetter = false;
+            happinessGenerator(step);
+        })  
+        dQuery.button2.addEventListener("click", () => {
+            feelsBetter = true;
+            handleListener.feelsBetterHandler();
+        });
     }
 
-    
+    return {
+        feelsBetterHandler, choiceHandler,
+    }  
 })();
-
-
-choiceHandler = () => {    
-    button1.addEventListener("click", () => {
-        feelsBetter = false;
-        happinessGenerator(step);
-    })  
-    button2.addEventListener("click", () => {
-        feelsBetter = true;
-        handleListener.feelsBetterHandler();
-    });
-}
 
 /* Updates button text and action for every question*/
 function buttonListenerUpdater (arg) {
@@ -327,7 +323,7 @@ function happinessGenerator (step) {
             break; */
         }
 }
-choiceHandler();
+handleListener.choiceHandler();
 warningHandler();
 
 
